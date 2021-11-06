@@ -1,9 +1,13 @@
-import './App.css';
+import './scss/app.scss';
+import NotesContainer from './containers/NotesContainer.js'
 
 function App() {
   return (
     <div className="App">
-      HelloWorld
+      app
+      {/* <LoginContainer /> */}
+      <NotesContainer />
+
     </div>
   );
 }
