@@ -1,21 +1,38 @@
 import React from 'react';
 import Note from './Note'
 
-
-const Notes = () => {
-
-    // get all notes here
-
-    // define functions for drag and drop here
+const Notes = ({ notes, setNotes }) => {
     
-    let fakeData = [1,2,3,4,5]
-    const loadedNotes = fakeData.map((note) => <Note text={note} key={note} id={note} />)
+    // defined both delete and dropNote here to consolidate functinality
+
+    const deleteNote = (id) => {
+            
+        let newNotes = notes.reduce((acc, curr) => {
+            if(curr.id !== id) acc.push(curr)
+            return acc
+        }, [])
+
+        setNotes(newNotes)
+    }
+
+    const dropNote = event => {
+        event.target.style.left = `${event.pageX - 50}px`;
+        event.target.style.top = `${event.pageY - 50}px`;
+      };
+
+    const allNotes = notes.map(note => {
+
+        return <Note text={note.text} key={note.id} id={note.id} dropNote={dropNote} deleteNote={deleteNote} />
+    })
+
     return (
-        <div>
-            note
-            {loadedNotes}
-        </div>
+        <div>{allNotes}</div>
     )
 }
 
 export default Notes;
+
+
+
+
+

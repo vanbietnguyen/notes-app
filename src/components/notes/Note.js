@@ -1,13 +1,13 @@
 import React from 'react';
 
 
-const Note = ({ text }) => {
+const Note = ({ text, id, deleteNote, dropNote }) => {
 
-    // define delete and put methods here
 
     return (
-        <div className="note" >
-            {text}
+        <div id={id} className="note" onDragEnd={dropNote} draggable="true">
+            <button onClick={() => deleteNote(id)}>delete</button>
+            <pre className="text">{text}</pre>
         </div>
     )
 }
