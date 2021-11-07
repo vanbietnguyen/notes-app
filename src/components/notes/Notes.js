@@ -15,9 +15,21 @@ const Notes = ({ notes, setNotes }) => {
         setNotes(newNotes)
     }
 
+    // converting pixels to vh/vw (for later)
+    // px in vw: 100 * px / windowWidth.
+    // px in vh: 100 * px / windowHeight.
+
     const dropNote = event => {
-        event.target.style.left = `${event.pageX - 50}px`;
-        event.target.style.top = `${event.pageY - 50}px`;
+        let xCoordinate = event.pageX - 50
+        let yCoordinate = event.pageY - 50
+
+        if(xCoordinate < 65) xCoordinate = 65
+        if(xCoordinate > 1100) xCoordinate = 1100
+        if(yCoordinate < 10) yCoordinate = 10
+        if(yCoordinate > 450) yCoordinate = 450
+
+        event.target.style.left = `${xCoordinate}px`;
+        event.target.style.top = `${yCoordinate}px`;
       };
 
     const allNotes = notes.map(note => {

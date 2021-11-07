@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-const NotesCreator = ({ notes, setNotes }) => {
+const NotesModal = ({ notes, setNotes, closeModal }) => {
     // take the value from target and set it as the value sent back to notes
     const [notesInput, setNotesInput] = useState('')
 
     const addNote = (e) => {
         e.preventDefault()
+        
+        let textArea = document.querySelector('#note-text-area')
+        textArea.value = ''
 
         let note = {
             'id': uuid(),
@@ -17,13 +20,15 @@ const NotesCreator = ({ notes, setNotes }) => {
         const newNotes = notes.slice()
         newNotes.push(note)
         setNotes(newNotes)
+        closeModal()
+
     }
 
     return (
-        <div>
+        <div className="notes-modal">
             <form>
-                <textarea  onChange={(e)=> setNotesInput(e.target.value)} placeholder="what's on your mind?"></textarea>
-                <input onClick={(e) => addNote(e)} type="submit"></input>
+                <textarea  id="note-text-area" onChange={(e)=> setNotesInput(e.target.value)} placeholder="what's on your mind?"></textarea>
+                <input onClick={(e) => addNote(e)} value="+" type="submit"></input>
             </form>
         </div>
     )
@@ -31,4 +36,4 @@ const NotesCreator = ({ notes, setNotes }) => {
 
 // onChange={(e)=> setNotesInput(e.target.value)}
 
-export default NotesCreator;
+export default NotesModal;
