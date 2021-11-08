@@ -16,8 +16,8 @@ const NotesContainer = () => {
         <div className="notes-container">
             
             { showModal ? 
-                    <NotesModal notes={notes} setNotes={setNotes} closeModal={changeModal} /> 
-            : 
+                <NotesModal notes={notes} setNotes={setNotes} closeModal={changeModal} /> 
+                : 
                 <>
                     <Sidebar notes={notes} setNotes={setNotes} openModal={changeModal}/>
                     <Notes notes={notes} setNotes={setNotes} />

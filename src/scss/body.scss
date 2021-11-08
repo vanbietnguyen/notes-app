@@ -1,5 +1,5 @@
 * {
-    // box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
@@ -8,6 +8,7 @@ body {
 }
 
 .App {
-    padding: 50px;
+    padding: 5vh;
     height: 100vh;
+    border: solid;
 }

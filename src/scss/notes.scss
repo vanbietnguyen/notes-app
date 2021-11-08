@@ -3,22 +3,30 @@
     cursor: pointer;
     top: 100px;
     left: 300px;
-    height: 200px;
-    width: 200px;
+    height: 25vh;
+    width: 25vh;
     padding: 20px;
 }
 
-// @random-margin: `Math.random() * 100 + 65`
+// @random-margin: `Ma sth.random() * 100 + 65`
 
 // if(xCoordinate < 65) xCoordinate = 65
 // if(xCoordinate > 1100) xCoordinate = 1100
 // if(yCoordinate < 10) yCoordinate = 10
 // if(yCoordinate > 450) yCoordinate = 450
 
-.notes-container {
-    position: relative;
-    border: solid;
-}
+// .notes-container {
+//     position: relative;
+//     border: solid;
+//     height: 200px;
+//     width: 200px;
+//     border: solid;
+// }
+
+// .notes-container {
+//     border: solid;
+//     margin: 200px;
+// }
 
 .notes-modal {
     position: fixed;
@@ -38,11 +46,6 @@ form {
     justify-content: center;
 }
 
-// #note-text-area {
-//     // position: absolute;
-//     left:25px;
-//     padding: 2px;
-// }
 
 #color-picker {
     position: relative;
@@ -51,4 +54,12 @@ form {
     justify-content: center;
     margin: 20px;
     left: 20px;
+}
+
+.notes-area {
+    position: fixed;
+    left: 10vw;
+    width: 85vw;
+    //width: 1200px;
+    height: 90vh;
 }
