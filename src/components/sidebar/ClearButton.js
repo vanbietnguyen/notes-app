@@ -1,9 +1,10 @@
 import React from 'react';
 
 
-const ClearButton = ({ notes, setNotes }) => {
+const ClearButton = ({ setNotes, setLines }) => {
     // clear canvas by retrieving entire notes array and setting it to {}
     const clear = () => {
+        setLines([])
         setNotes([])
     }
     

@@ -6,6 +6,7 @@
     height: 25vh;
     width: 25vh;
     padding: 20px;
+    z-index: 999;
 }
 
 // @random-margin: `Ma sth.random() * 100 + 65`
@@ -14,19 +15,6 @@
 // if(xCoordinate > 1100) xCoordinate = 1100
 // if(yCoordinate < 10) yCoordinate = 10
 // if(yCoordinate > 450) yCoordinate = 450
-
-// .notes-container {
-//     position: relative;
-//     border: solid;
-//     height: 200px;
-//     width: 200px;
-//     border: solid;
-// }
-
-// .notes-container {
-//     border: solid;
-//     margin: 200px;
-// }
 
 .notes-modal {
     position: fixed;
@@ -38,6 +26,11 @@
     left: 50%;
   /* bring your own prefixes */
     transform: translate(-50%, -50%);
+    z-index: 999;
+}
+
+.isModal {
+    opacity: 90%;
 }
 
 form {
@@ -62,4 +55,5 @@ form {
     width: 85vw;
     //width: 1200px;
     height: 90vh;
+    
 }

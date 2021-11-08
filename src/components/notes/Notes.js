@@ -15,28 +15,17 @@ const Notes = ({ notes, setNotes }) => {
         setNotes(newNotes)
     }
 
-    // converting pixels to vh/vw (for later)
-    // px in vw: 100 * px / windowWidth.
-    // px in vh: 100 * px / windowHeight.
-
-    // Pixel (px) = (Viewport width unit (vw) * Viewport width) / 100
-
     const dropNote = event => {
         let xCoordinate = event.pageX - 50
         let yCoordinate = event.pageY - 50
 
-        // let w = document.documentElement.clientWidth;
-        // let h = document.documentElement.clientHeight;
         let w = window.innerWidth;
         let h = window.innerHeight;
-
 
         let minWidth = (0 * w) / 100;
         let minHeight = (0 * h) / 100;
         let maxWidth = (85 * w) / 100;
         let maxHeight = (80 * h) / 100;
-
-        console.log('maxheight:', maxHeight, 'h', h, 'y', yCoordinate)
 
         if(xCoordinate < 0) xCoordinate = minWidth - 25
         if(xCoordinate > maxWidth) xCoordinate = maxWidth - 210
@@ -53,7 +42,9 @@ const Notes = ({ notes, setNotes }) => {
     })
 
     return (
-        <div className="notes-area">{allNotes}</div>
+        <div className="notes-area">
+            {allNotes}
+        </div>
     )
 }
 
