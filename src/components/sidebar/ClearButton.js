@@ -8,7 +8,7 @@ const ClearButton = ({ notes, setNotes }) => {
     }
     
     return (
-        <input className="sidebar-button" value="clear" onClick={clear} />
+        <input className="sidebar-button" value="clear" type="submit" onClick={clear} />
     )
 };
 

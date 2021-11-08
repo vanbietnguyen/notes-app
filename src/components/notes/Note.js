@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const Note = ({ text, id, deleteNote, dropNote }) => {
+const Note = ({ text, id, color, deleteNote, dropNote }) => {
 
 
     return (
-        <div id={id} className="note" onDragEnd={dropNote} draggable="true">
+        <div style={{backgroundColor: color}} id={id} className="note" onDragEnd={dropNote} draggable="true">
             <button onClick={() => deleteNote(id)}>delete</button>
             <pre className="text">{text}</pre>
         </div>

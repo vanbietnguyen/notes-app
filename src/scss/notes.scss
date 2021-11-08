@@ -1,13 +1,19 @@
 .note {
     position: absolute;
     cursor: pointer;
-    background-color: aquamarine;
     top: 100px;
     left: 300px;
     height: 200px;
     width: 200px;
     padding: 20px;
 }
+
+// @random-margin: `Math.random() * 100 + 65`
+
+// if(xCoordinate < 65) xCoordinate = 65
+// if(xCoordinate > 1100) xCoordinate = 1100
+// if(yCoordinate < 10) yCoordinate = 10
+// if(yCoordinate > 450) yCoordinate = 450
 
 .notes-container {
     position: relative;
@@ -16,12 +22,33 @@
 
 .notes-modal {
     position: fixed;
-    display: flex;
     width: 40vh;
+    height: 40vh;
     border: solid;
-    position: fixed;
+    padding: 25px;
     top: 50%;
     left: 50%;
   /* bring your own prefixes */
     transform: translate(-50%, -50%);
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// #note-text-area {
+//     // position: absolute;
+//     left:25px;
+//     padding: 2px;
+// }
+
+#color-picker {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    left: 20px;
 }
