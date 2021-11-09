@@ -4,7 +4,6 @@ import Note from './Note'
 const Notes = ({ notes, setNotes }) => {
     
     // defined both delete and dropNote here to consolidate functinality
-
     const deleteNote = (id) => {
             
         let newNotes = notes.reduce((acc, curr) => {
@@ -37,7 +36,8 @@ const Notes = ({ notes, setNotes }) => {
       };
 
     const allNotes = notes.map(note => {
-
+        
+        // return <Note color={note.color} text={note.text} key={note.id} id={note.id} dropNote={dropNote} deleteNote={deleteNote} />
         return <Note color={note.color} text={note.text} key={note.id} id={note.id} dropNote={dropNote} deleteNote={deleteNote} />
     })
 

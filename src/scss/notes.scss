@@ -1,6 +1,8 @@
 .note {
-    position: absolute;
+    position: fixed;
     cursor: pointer;
+    // visibility: hidden;
+    background-color: transparent blue;
     top: 100px;
     left: 300px;
     height: 25vh;
@@ -9,15 +11,9 @@
     z-index: 999;
 }
 
-// @random-margin: `Ma sth.random() * 100 + 65`
-
-// if(xCoordinate < 65) xCoordinate = 65
-// if(xCoordinate > 1100) xCoordinate = 1100
-// if(yCoordinate < 10) yCoordinate = 10
-// if(yCoordinate > 450) yCoordinate = 450
-
 .notes-modal {
     position: fixed;
+    background-color: white;
     width: 40vh;
     height: 40vh;
     border: solid;
@@ -29,9 +25,6 @@
     z-index: 999;
 }
 
-.isModal {
-    opacity: 90%;
-}
 
 form {
     display: flex;
@@ -56,4 +49,10 @@ form {
     //width: 1200px;
     height: 90vh;
     
+}
+
+.modalToggle {
+    opacity: .5;
+    z-index: -1;
+    pointer-events: none;
 }

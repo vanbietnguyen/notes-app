@@ -5,7 +5,7 @@ import EraserButton from '../components/sidebar/EraserButton'
 import PenButton from '../components/sidebar/PenButton'
 import PointerButton from '../components/sidebar/PointerButton'
 
-const Sidebar = ({ notes, setNotes, openModal, changeTool, changePointer, setLines }) => {
+const Sidebar = ({ notes, setNotes, openModal, changeTool, changePointer, setLines, lines }) => {
     return (
         <div id="sidebar">
             <NotesButton openModal={openModal} />

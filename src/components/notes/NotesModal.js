@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { CirclePicker } from 'react-color';
+import Service from '../../services/Services'
 
 const NotesModal = ({ notes, setNotes, closeModal }) => {
     // take the value from target and set it as the value sent back to notes
     const [notesInput, setNotesInput] = useState('')
-    const [color, setColor] = useState('#FFFF88')
+    const [color, setColor] = useState('#68B6D9')
 
     const addNote = (e) => {
         e.preventDefault()
@@ -18,13 +19,17 @@ const NotesModal = ({ notes, setNotes, closeModal }) => {
             'created-at': new Date().toDateString(),
             'text': notesInput,
             'color': color,
+            'positionX': null,
+            'positionY': null
         }
+        
+        Service.save('NOTE', note)
         
         const newNotes = notes.slice()
         newNotes.push(note)
         setNotes(newNotes)
         closeModal()
-
+        
     }
 
     return (
