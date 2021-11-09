@@ -2,31 +2,33 @@ import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { CirclePicker } from 'react-color';
 import service from '../../services/services'
+import axios from 'axios'
 
 const NotesModal = ({ notes, setNotes, closeModal }) => {
     // take the value from target and set it as the value sent back to notes
     const [notesInput, setNotesInput] = useState('')
     const [color, setColor] = useState('#68B6D9')
 
-    const addNote = (e) => {
+    const addNote = async (e) => {
         e.preventDefault()
         
         let textArea = document.querySelector('#note-text-area')
         textArea.value = ''
 
         let note = {
-            'id': uuid(),
-            'created-at': new Date().toDateString(),
             'text': notesInput,
             'color': color,
-            'positionX': null,
-            'positionY': null
+            'top': '100',
+            'left': '300',
         }
-        
-        service.save('NOTE', note)
+        console.log('prenote', note)
+        // pass note into axios request
+        let result = await axios.post('api/notes/add', note)
+        // console.log(result.data, 'result')
+        // get result and pass it into setNotes
         
         const newNotes = notes.slice()
-        newNotes.push(note)
+        newNotes.push(result.data)
         setNotes(newNotes)
         closeModal()
         

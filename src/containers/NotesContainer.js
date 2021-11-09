@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useRef, useEffect } from 'react';
 import Notes from '../components/notes/Notes'
 import Sidebar from './Sidebar'
 import NotesModal from '../components/notes/NotesModal'
 import CanvasArea from '../components/notes/CanvasArea'
+import axios from 'axios';
 // import services from '../services/services'
 
 const NotesContainer = () => {
@@ -12,6 +14,12 @@ const NotesContainer = () => {
     const [drawPointer, setDrawPointer] = useState(false)
     const [lines, setLines] = useState([]);
     const [tool, setTool] = useState("eraser")
+
+    useEffect(async() => {
+        let notes = await axios.get('/api/notes/')
+        console.log('notes rerendered', notes)
+        setNotes(notes.data)
+    }, [])
 
     const changeModal = () => {
         if(drawPointer) setDrawPointer(false)
@@ -38,7 +46,6 @@ const NotesContainer = () => {
             { showModal ? 
                 <>
                     <NotesModal
-                        // ref={modalRef} 
                         notes={notes} 
                         setNotes={setNotes} 
                         closeModal={changeModal}

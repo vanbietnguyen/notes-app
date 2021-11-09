@@ -33,11 +33,18 @@ const Notes = ({ notes, setNotes }) => {
 
         event.target.style.left = `${xCoordinate}px`;
         event.target.style.top = `${yCoordinate}px`;
+        console.log(event.target, 'event target')
+        let note = notes.filter((n) => event.target.id)
+        console.log(note, 'note')
+        note[0].left = xCoordinate
+        note[0].top = yCoordinate
+        // update database for notes by passing in id(put request)
+
       };
 
     const allNotes = notes.map(note => {
         
-        return <Note color={note.color} text={note.text} key={note.id} id={note.id} dropNote={dropNote} deleteNote={deleteNote} />
+        return <Note color={note.color} left={note.left} top={note.top} text={note.text} key={note._id} id={note._id} dropNote={dropNote} deleteNote={deleteNote} />
     })
 
     return (

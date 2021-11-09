@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const MONGO_URI = '';
+const MONGO_URI = 'mongodb+srv://vanbietNguyen:codesmith1234@cluster0.w55d9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_URI, {
   // options for the connect method to parse the URI
   useNewUrlParser: true,
   useUnifiedTopology: true,
   // sets the name of the DB that our collections are part of
-  dbName: ''
+  dbName: 'notes-app'
 })
   .then(() => console.log('Connected to Mongo DB.'))
   .catch(err => console.log(err));
@@ -14,7 +14,12 @@ mongoose.connect(MONGO_URI, {
 const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({
-
+    text: {type: String, required: true},
+    color: {type: String, required: true},
+    top: {type: Number, required: true},
+    left: {type: Number, required: true},
 })
 
 const Note = mongoose.model('note', noteSchema);
+
+module.exports = { Note }

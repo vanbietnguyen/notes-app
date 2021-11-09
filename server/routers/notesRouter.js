@@ -4,14 +4,15 @@ const router = express.Router();
 
 //instead of adding individual notes, i can just remove an entire array of notes
  
-router.get('/getNotes', notesController.getNotes, (req, res) => {
+router.get('/', notesController.getNotes, (req, res) => {
   const result = res.locals.notes
   return res.status(200).send(result)
 })
 
-router.post('/addNote', notesController.addNote, (req, res) => {
-  const result = res.locals.data;
-  return res.status(200).json(result)
+router.post('/add', notesController.addNote, (req, res) => {
+  // const result = res.locals.note;
+  // console.log('result in addNote:', result)
+  return res.status(200).json(res.locals.note)
 })
 
 router.put('/updateNote', notesController.updateNote, (req, res) => {
@@ -24,8 +25,7 @@ router.delete('/deleteNote', notesController.deleteNote, (req, res) => {
   return res.status(200).json(result)
 })
 
-// one for clearing canvas
-// one for clearing all notes
+
 
 
 
