@@ -59,13 +59,13 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
   return (
     <div>
       <Stage
-          className="canvas-stage"
-          ref={stageRef}
-          width={600}
-          height={600}
-          onMouseDown={handleMouseDown}
-          onMousemove={handleMouseMove}
-          onMouseup={handleMouseUp}
+        className="canvas-stage"
+        ref={stageRef}
+        width={600}
+        height={600}
+        onMouseDown={handleMouseDown}
+        onMousemove={handleMouseMove}
+        onMouseup={handleMouseUp}
       >
         <Layer className="layer" clearBeforeDraw={false}>
           

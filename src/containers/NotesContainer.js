@@ -5,7 +5,6 @@ import NotesModal from '../components/notes/NotesModal'
 import CanvasArea from '../components/notes/CanvasArea'
 // import services from '../services/services'
 
-
 const NotesContainer = () => {
 
     const [notes, setNotes] = useState([])

@@ -37,7 +37,6 @@ const Notes = ({ notes, setNotes }) => {
 
     const allNotes = notes.map(note => {
         
-        // return <Note color={note.color} text={note.text} key={note.id} id={note.id} dropNote={dropNote} deleteNote={deleteNote} />
         return <Note color={note.color} text={note.text} key={note.id} id={note.id} dropNote={dropNote} deleteNote={deleteNote} />
     })
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { CirclePicker } from 'react-color';
-import Service from '../../services/Services'
+import service from '../../services/services'
 
 const NotesModal = ({ notes, setNotes, closeModal }) => {
     // take the value from target and set it as the value sent back to notes
@@ -23,7 +23,7 @@ const NotesModal = ({ notes, setNotes, closeModal }) => {
             'positionY': null
         }
         
-        Service.save('NOTE', note)
+        service.save('NOTE', note)
         
         const newNotes = notes.slice()
         newNotes.push(note)
