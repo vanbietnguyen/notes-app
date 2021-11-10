@@ -28,16 +28,38 @@ notesController.addNote = async (req, res, next) => {
 
 }
 
-notesController.updateNote = (req, res, next) => {
-  
+notesController.updateNote = async (req, res, next) => {
+    // takes in form data and updates the User document
+    try {
+      const { id, text, color, top, left } = req.body;
+      let note = await models.findOneAndUpdate(
+        { _id: id },
+        { $push: { text: text, color: color, top: top, left: left } }
+      );
+
+      res.locals.note = note;
+      return next();
+    } catch (e) {
+      return next(e);
+    }
+  };
+
+notesController.deleteNote = async (req, res, next) => {
+  try {
+    const { id } = req.body;
+    await models.deleteOne({ _id: id });
+  } catch(e) {
+    return next(e)
+  }
+
 }
 
-notesController.deleteNote = (req, res, next) => {
-
-}
-
-notesController.clearNotes = (req, res, next) => {
-
+notesController.clearNotes = async (req, res, next) => {
+  try {
+    await models.deleteMany({})
+  } catch (e) {
+    return next(e)
+  }  
 }
  
 module.exports = notesController;
