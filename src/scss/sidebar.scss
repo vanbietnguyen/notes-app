@@ -1,18 +1,25 @@
 #sidebar {
     position: absolute;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 0;
     cursor: pointer;
     background-color: green;
     border: solid;
     border-radius: 25px;
     top: 20%;
-    // left: 300px;
     height: 60vh;
     width: 50px;
     margin: 10px;
-    // padding: 20px;
     z-index: 99;
 }
 
 .sidebar-button {
-    width: 40px;
+    width: 80px;
+    // height: 20px;
+    padding: 0;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    border-radius: 100%;
+
 }

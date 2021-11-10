@@ -35,8 +35,8 @@ const Notes = ({ notes, setNotes }) => {
 
         event.target.style.left = `${left}px`;
         event.target.style.top = `${top}px`;
+        
         let id = event.target.id
-        console.log(id, 'id')
         let note = notes.filter((n) => n._id === id)
         let other = notes.filter((n) => n._id !== id)
         note[0].left = left

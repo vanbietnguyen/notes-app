@@ -4,7 +4,7 @@ import React from 'react';
 const NotesButton = ({openModal}) => {
 
     return (
-        <input value="+" type="submit" onClick={() => openModal()}/>
+        <input className="sidebar-button" value="+" type="submit" onClick={() => openModal()}/>
     )
 }
 

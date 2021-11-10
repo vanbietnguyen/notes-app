@@ -4,7 +4,7 @@ import React from 'react';
 const PenButton = ({changeTool}) => {
 
     return (
-        <input value="pen" type="submit" onClick={() => changeTool('pen')}/>
+        <input className="sidebar-button" value="pen" type="submit" onClick={() => changeTool('pen')}/>
     )
 }
 
