@@ -21,12 +21,8 @@ const NotesModal = ({ notes, setNotes, closeModal }) => {
             'top': '100',
             'left': '300',
         }
-        console.log('prenote', note)
-        // pass note into axios request
+
         let result = await axios.post('api/notes/add', note)
-        // console.log(result.data, 'result')
-        // get result and pass it into setNotes
-        
         const newNotes = notes.slice()
         newNotes.push(result.data)
         setNotes(newNotes)

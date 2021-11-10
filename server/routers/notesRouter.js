@@ -10,21 +10,17 @@ router.get('/', notesController.getNotes, (req, res) => {
 })
 
 router.post('/add', notesController.addNote, (req, res) => {
-  // const result = res.locals.note;
-  // console.log('result in addNote:', result)
   return res.status(200).json(res.locals.note)
 })
 
-router.put('/updateNote', notesController.updateNote, (req, res) => {
+router.post('/update', notesController.update, (req, res) => {
   const result = res.locals.data;
   return res.status(200).json(result)
 })
 
-router.delete('/deleteNote', notesController.deleteNote, (req, res) => {
-  const result = res.locals.data;
-  return res.status(200).json(result)
-})
+router.post('/delete', notesController.delete, (req, res) => res.status(200))
 
+router.post('/clear', notesController.clear, (req, res) => res.status(200))
 
 
 

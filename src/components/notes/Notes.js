@@ -1,22 +1,25 @@
 import React from 'react';
 import Note from './Note'
+import axios from 'axios'
 
 const Notes = ({ notes, setNotes }) => {
     
-    // defined both delete and dropNote here to consolidate functinality
-    const deleteNote = (id) => {
-            
+    // abstract away
+    const deleteNote = (_id) => {
+        
         let newNotes = notes.reduce((acc, curr) => {
-            if(curr.id !== id) acc.push(curr)
+            if(curr._id !== _id) acc.push(curr)
             return acc
         }, [])
 
         setNotes(newNotes)
+        console.log(_id, 'id')
+        axios.post('api/notes/delete', { _id })
     }
 
-    const dropNote = event => {
-        let xCoordinate = event.pageX - 50
-        let yCoordinate = event.pageY - 50
+    const dropNote = async event => {
+        let left = event.pageX - 50
+        let top = event.pageY - 50
 
         let w = window.innerWidth;
         let h = window.innerHeight;
@@ -26,19 +29,21 @@ const Notes = ({ notes, setNotes }) => {
         let maxWidth = (85 * w) / 100;
         let maxHeight = (80 * h) / 100;
 
-        if(xCoordinate < 0) xCoordinate = minWidth - 25
-        if(xCoordinate > maxWidth) xCoordinate = maxWidth - 210
-        if(yCoordinate < 0) yCoordinate = minHeight - 25
-        if(yCoordinate > maxHeight) yCoordinate = maxHeight - 130
+        if(left < 0) left = minWidth - 25
+        if(left > maxWidth) left = maxWidth - 210
+        if(top < 0) top = minHeight - 25
+        if(top > maxHeight) top = maxHeight - 130
 
-        event.target.style.left = `${xCoordinate}px`;
-        event.target.style.top = `${yCoordinate}px`;
+        event.target.style.left = `${left}px`;
+        event.target.style.top = `${top}px`;
         console.log(event.target, 'event target')
-        let note = notes.filter((n) => event.target.id)
+        let id = event.target.id
+        let note = notes.filter((n) => id)
         console.log(note, 'note')
-        note[0].left = xCoordinate
-        note[0].top = yCoordinate
-        // update database for notes by passing in id(put request)
+        note[0].left = left
+        note[0].top = top
+
+        await axios.post('api/notes/update', { id, left, top })
 
       };
 
