@@ -19,7 +19,6 @@ notesController.addNote = async (req, res, next) => {
   try {
     const { text, color, top, left } = req.body
     const result = await models.Note.create({ text, color, top, left });
-    console.log('result:', result)
     res.locals.note = result
     return next()
   } catch(err) {
@@ -28,35 +27,33 @@ notesController.addNote = async (req, res, next) => {
 
 }
 
-notesController.updateNote = async (req, res, next) => {
+notesController.update = async (req, res, next) => {
     // takes in form data and updates the User document
     try {
-      const { id, text, color, top, left } = req.body;
-      let note = await models.findOneAndUpdate(
-        { _id: id },
-        { $push: { text: text, color: color, top: top, left: left } }
-      );
-
-      res.locals.note = note;
+      const { id, ...rest } = req.body
+      let note = await models.Note.findOneAndUpdate({ _id: id }, rest)
+      console.log(note, 'note update')
       return next();
     } catch (e) {
       return next(e);
     }
   };
 
-notesController.deleteNote = async (req, res, next) => {
+notesController.delete = async (req, res, next) => {
   try {
-    const { id } = req.body;
-    await models.deleteOne({ _id: id });
+    console.log(req.body, 'reqbody in delete')
+    const { _id } = req.body;
+    await models.Note.deleteOne({ _id });
+
   } catch(e) {
     return next(e)
   }
 
 }
 
-notesController.clearNotes = async (req, res, next) => {
+notesController.clear = async (req, res, next) => {
   try {
-    await models.deleteMany({})
+    await models.Note.deleteMany({})
   } catch (e) {
     return next(e)
   }  
