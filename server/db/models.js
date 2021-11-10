@@ -23,4 +23,11 @@ const noteSchema = new Schema({
 
 const Note = mongoose.model('note', noteSchema);
 
-module.exports = { Note }
+const lineSchema = new Schema({
+  tool: {type: String, required: true},
+  points: {type: Array, required: true},
+})
+
+const Line = mongoose.model('line', lineSchema);
+
+module.exports = { Note, Line }

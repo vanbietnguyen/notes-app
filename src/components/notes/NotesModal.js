@@ -23,9 +23,7 @@ const NotesModal = ({ notes, setNotes, closeModal }) => {
         }
 
         let result = await axios.post('api/notes/add', note)
-        const newNotes = notes.slice()
-        newNotes.push(result.data)
-        setNotes(newNotes)
+        setNotes([...notes, result.data])
         closeModal()
         
     }

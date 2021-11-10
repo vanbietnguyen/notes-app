@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Line } from 'react-konva';
 
@@ -11,19 +12,10 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
   const isDrawing = useRef(false);
   const stageRef = useRef(false)
 
-  // check if image exists in db
-  // const [loadedDrawing, setLoadedDrawing] = useState(false)
 
-  // useEffect(async() => {
-  //   // get image
-  //   // if image exists, set loaded drawing to true
-  //   // set initial lines to drawing
-  // })
-
-
-  // useEffect(() => {
-  //   if(!lines.length) startOver(stageRef.current)
-  // }, [lines])
+  useEffect(() => {
+    if(!lines.length) startOver(stageRef.current)
+  }, [lines])
 
   const startOver = (stage) => {
     if(lines.length) return
@@ -35,6 +27,7 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
     isDrawing.current = true;
     const pos = e.target.getStage().getPointerPosition();
     setLines([...lines, { tool, points: [pos.x, pos.y] }]);
+    console.log(lines, 'lines')
   };
 
   const handleMouseMove = (e) => {
@@ -54,7 +47,14 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
     setLines(lines.concat());
   };
 
-  const handleMouseUp = (e) => isDrawing.current = false;
+  const handleMouseUp = (e) => {
+    // send lines to backend here
+    let line = lines[lines.length - 1]
+    console.log(line, 'line')
+    axios.post('api/lines/add', { line })
+    
+    isDrawing.current = false;
+  }
 
   return (
     <div>

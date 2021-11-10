@@ -39,7 +39,6 @@ const Notes = ({ notes, setNotes }) => {
         console.log(event.target, 'event target')
         let id = event.target.id
         let note = notes.filter((n) => id)
-        console.log(note, 'note')
         note[0].left = left
         note[0].top = top
 

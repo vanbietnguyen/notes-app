@@ -4,12 +4,12 @@ const router = express.Router();
 
 //instead of adding individual notes, i can just remove an entire array of notes
  
-router.get('/', notesController.getNotes, (req, res) => {
+router.get('/', notesController.get, (req, res) => {
   const result = res.locals.notes
   return res.status(200).send(result)
 })
 
-router.post('/add', notesController.addNote, (req, res) => {
+router.post('/add', notesController.add, (req, res) => {
   return res.status(200).json(res.locals.note)
 })
 

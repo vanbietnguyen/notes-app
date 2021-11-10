@@ -16,10 +16,21 @@ const NotesContainer = () => {
     const [tool, setTool] = useState("eraser")
 
     useEffect(async() => {
-        let notes = await axios.get('/api/notes/')
-        console.log('notes rerendered', notes)
+        let notes = await axios.get('api/notes/')
         setNotes(notes.data)
     }, [])
+
+    useEffect(async() => {
+        let result = await axios.get('api/lines/')
+
+        for(let line of result.data) {
+            delete line._id
+            delete line.__v
+        }
+        setLines(result.data)
+    }, [])
+    
+    // set lines from db here
 
     const changeModal = () => {
         if(drawPointer) setDrawPointer(false)
