@@ -15,11 +15,15 @@
 }
 
 .sidebar-button {
-    width: 80px;
-    // height: 20px;
+    width: 40px;
+    height: auto;
     padding: 0;
     margin-bottom: 0px;
-    margin-top: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 100%;
+}
 
+.sidebar-button:hover {
+    background-color: gray;
 }

@@ -11,7 +11,7 @@ const ClearButton = ({ setNotes, setLines }) => {
     }
     
     return (
-        <input className="sidebar-button" value="clear" type="submit" onClick={clear} />
+        <img alt="clear" className="sidebar-button" value="clear" src="" onClick={clear} />
     )
 };
 
