@@ -1,11 +1,7 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Line } from 'react-konva';
-
-const testArray = [{
-  tool: 'pen', 
-  points: [161.21875, 395.359375, 161.21875, 395.359375, 161.21875, 395.359375, 163.21875, 395.359375, 169.21875, 395.359375, 180.21875, 392.359375, 197.21875, 385.359375, 213.21875, 376.359375, 228.21875]
-}]
 
 const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLines}) => {
 

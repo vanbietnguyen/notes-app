@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { v4 as uuid } from 'uuid';
 import { CirclePicker } from 'react-color';
 import service from '../../services/services'
 import axios from 'axios'

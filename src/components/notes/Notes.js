@@ -13,7 +13,6 @@ const Notes = ({ notes, setNotes }) => {
         }, [])
 
         setNotes(newNotes)
-        console.log(_id, 'id')
         axios.post('api/notes/delete', { _id })
     }
 
@@ -36,14 +35,15 @@ const Notes = ({ notes, setNotes }) => {
 
         event.target.style.left = `${left}px`;
         event.target.style.top = `${top}px`;
-        console.log(event.target, 'event target')
         let id = event.target.id
-        let note = notes.filter((n) => id)
+        console.log(id, 'id')
+        let note = notes.filter((n) => n._id === id)
+        let other = notes.filter((n) => n._id !== id)
         note[0].left = left
         note[0].top = top
+        setNotes([...other, ...note])
 
         await axios.post('api/notes/update', { id, left, top })
-
       };
 
     const allNotes = notes.map(note => {
