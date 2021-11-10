@@ -4,7 +4,10 @@ import React from 'react';
 const NotesButton = ({openModal}) => {
 
     return (
-        <img alt="add" className="sidebar-button" value="+" src="https://github.com/vanbietnguyen/notes-app/blob/dev/.github/round-add.png?raw=true" onClick={() => openModal()}/>
+        <div className="sidebar-button" onClick={() => openModal()}>
+            <img className="button-img" alt="add"  value="+" src="https://github.com/vanbietnguyen/notes-app/blob/dev/.github/sticky-note.png?raw=true" />
+        </div>
+        
     )
 }
 

@@ -31,8 +31,7 @@ notesController.update = async (req, res, next) => {
     // takes in form data and updates the User document
     try {
       const { id, ...rest } = req.body
-      let note = await models.Note.findOneAndUpdate({ _id: id }, rest)
-      console.log(note, 'note update')
+      await models.Note.findOneAndUpdate({ _id: id }, rest)
       return next();
     } catch (e) {
       return next(e);
@@ -41,7 +40,6 @@ notesController.update = async (req, res, next) => {
 
 notesController.delete = async (req, res, next) => {
   try {
-    console.log(req.body, 'reqbody in delete')
     const { _id } = req.body;
     await models.Note.deleteOne({ _id });
 

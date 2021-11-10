@@ -4,7 +4,9 @@ import React from 'react';
 const EraserButton = ({changeTool}) => {
 
     return (
-        <input className="sidebar-button" value="eraser" type="submit" onClick={() => changeTool('eraser')}/>
+        <div className="sidebar-button" onClick={() => changeTool('eraser')}>
+            <img className="button-img" alt="eraser" src="" />
+        </div>
     )
 }
 

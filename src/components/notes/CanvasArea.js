@@ -23,7 +23,6 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
     isDrawing.current = true;
     const pos = e.target.getStage().getPointerPosition();
     setLines([...lines, { tool, points: [pos.x, pos.y] }]);
-    console.log(lines, 'lines')
   };
 
   const handleMouseMove = (e) => {
@@ -46,7 +45,6 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
   const handleMouseUp = (e) => {
     // send lines to backend here
     let line = lines[lines.length - 1]
-    console.log(line, 'line')
     axios.post('api/lines/add', { line })
     
     isDrawing.current = false;

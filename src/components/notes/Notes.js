@@ -45,11 +45,8 @@ const Notes = ({ notes, setNotes }) => {
 
         await axios.post('api/notes/update', { id, left, top })
       };
-
-    const allNotes = notes.map(note => {
-        
-        return <Note color={note.color} left={note.left} top={note.top} text={note.text} key={note._id} id={note._id} dropNote={dropNote} deleteNote={deleteNote} />
-    })
+    let allNotes = notes ? notes.map(note => <Note color={note.color} left={note.left} top={note.top} text={note.text} key={note._id} id={note._id} dropNote={dropNote} deleteNote={deleteNote} />) : [null]
+    // let allNotes = notes.map(note => <Note color={note.color} left={note.left} top={note.top} text={note.text} key={note._id} id={note._id} dropNote={dropNote} deleteNote={deleteNote} />) 
 
     return (
         <div className="notes-area">

@@ -4,8 +4,7 @@
     grid-template-rows: repeat(5, 1fr);
     grid-gap: 0;
     cursor: pointer;
-    background-color: green;
-    border: solid;
+    border: solid lightgray .25px;
     border-radius: 25px;
     top: 20%;
     height: 60vh;
@@ -15,8 +14,9 @@
 }
 
 .sidebar-button {
-    width: 40px;
-    height: auto;
+    position: relative;
+    width: 50px;
+    height: 50px;
     padding: 0;
     margin-bottom: 0px;
     margin-top: 20px;
@@ -24,6 +24,18 @@
     border-radius: 100%;
 }
 
+.button-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
 .sidebar-button:hover {
-    background-color: gray;
+    background-color: lightgray;
+}
+
+.active {
+    background-color: lightgray;
 }

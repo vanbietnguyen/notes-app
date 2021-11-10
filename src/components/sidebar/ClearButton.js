@@ -11,7 +11,10 @@ const ClearButton = ({ setNotes, setLines }) => {
     }
     
     return (
-        <img alt="clear" className="sidebar-button" value="clear" src="" onClick={clear} />
+        <div className="sidebar-button" onClick={clear}>
+            <img className="button-img" alt="clear" src="" />
+        </div>
+        
     )
 };
 

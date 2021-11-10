@@ -29,7 +29,6 @@ linesController.update = async (req, res, next) => {
     try {
       const { id, ...rest } = req.body
       let note = await models.Note.findOneAndUpdate({ _id: id }, rest)
-      console.log(note, 'note update')
       return next();
     } catch (e) {
       return next(e);

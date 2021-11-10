@@ -10,10 +10,6 @@ class Service {
         ctx.fill()
     }
 
-    static async save(lines, notes) {
-        console.log('notes', notes, 'lines:', lines)
-    }
-
     static async updateNotes() {
 
     }

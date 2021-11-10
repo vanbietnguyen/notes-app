@@ -3,7 +3,7 @@ import { CirclePicker } from 'react-color';
 import service from '../../services/services'
 import axios from 'axios'
 
-const NotesModal = ({ notes, setNotes, closeModal }) => {
+const NotesModal = ({ notes, setNotes, closeModal, socket }) => {
     // take the value from target and set it as the value sent back to notes
     const [notesInput, setNotesInput] = useState('')
     const [color, setColor] = useState('#68B6D9')
@@ -22,10 +22,10 @@ const NotesModal = ({ notes, setNotes, closeModal }) => {
         }
 
         let result = await axios.post('api/notes/add', note)
-        setNotes([...notes, result.data])
+        socket.emit("modify", result.data)
         closeModal()
+    };
         
-    }
 
     return (
         <div className="notes-modal">

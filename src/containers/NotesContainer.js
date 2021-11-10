@@ -1,13 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Notes from '../components/notes/Notes'
 import Sidebar from './Sidebar'
 import NotesModal from '../components/notes/NotesModal'
 import CanvasArea from '../components/notes/CanvasArea'
 import axios from 'axios';
+
+import socketIOClient from "socket.io-client";
+const ENDPOINT = "http://localhost:8080";
+const socket = socketIOClient(ENDPOINT);
+// set up sockets whenever new notes occur and whenever we setNotes or Lines 
+// (on mouse up, change position, create note, deletenote, clear)
+
 // import services from '../services/services'
 
+
 const NotesContainer = () => {
+    // websockets testing
+    const [response, setResponse] = useState("");
 
     const [notes, setNotes] = useState([])
     const [showModal, setModal] = useState(false)
@@ -15,10 +25,25 @@ const NotesContainer = () => {
     const [lines, setLines] = useState([]);
     const [tool, setTool] = useState("eraser")
 
+    // websockets testing
     useEffect(async() => {
-        let notes = await axios.get('api/notes/')
-        setNotes(notes.data)
+        socket.on("FromAPI", data => {
+            setResponse(data);
+            console.log(data, 'res from sockets in frontend')
+          });
     }, [])
+
+    useEffect(async() => {
+        let result = await axios.get('api/notes/')
+        setNotes(result.data);
+    }, [])
+
+    // setting Notes based on listeners
+    useEffect(() => {
+        socket.on("add", (data) => {
+          setNotes([...notes, data]); 
+        });
+      }, [socket, notes, setNotes]);
 
     useEffect(async() => {
         let result = await axios.get('api/lines/')
@@ -29,8 +54,6 @@ const NotesContainer = () => {
         }
         setLines(result.data)
     }, [])
-    
-    // set lines from db here
 
     const changeModal = () => {
         if(drawPointer) setDrawPointer(false)
@@ -53,16 +76,18 @@ const NotesContainer = () => {
 
     return (
         <div className="notes-container">
-            
+            {response}
             { showModal ? 
                 <>
                     <NotesModal
+                        socket={socket}
                         notes={notes} 
                         setNotes={setNotes} 
                         closeModal={changeModal}
                     />
                     <div className="modalToggle">
-                        <Sidebar 
+                        <Sidebar
+                            socket={socket} 
                             changePointer={changePointer} 
                             notes={notes} 
                             changeTool={changeTool} 
@@ -70,8 +95,9 @@ const NotesContainer = () => {
                             setLines={setLines} 
                             openModal={changeModal} 
                         />
-                        <Notes notes={notes} setNotes={setNotes} />
-                        <CanvasArea   
+                        <Notes socket={socket} notes={notes} setNotes={setNotes} />
+                        <CanvasArea
+                            socket={socket}   
                             drawPointer={drawPointer} 
                             tool={tool} 
                             lines={lines} 
