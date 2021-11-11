@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // index
-app.get('/', (req, res) => res.sendStatus(200));
+app.get('/', (req, res) => res.send('server is up and running'));
 
 
 //routers
@@ -28,6 +28,7 @@ let io = socket(server, {
   // or process.env
   cors: {
     // origin: "http://localhost:3000",
+    // changed origin
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
   }
