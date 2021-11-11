@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios'
 import NotesService from '../../services/NotesService'
 
 const ClearButton = ({ setNotes, setLines, socket }) => {

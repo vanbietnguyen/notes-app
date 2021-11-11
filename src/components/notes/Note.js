@@ -5,7 +5,11 @@ const Note = ({ text, id, color, deleteNote, dropNote, top, left }) => {
 
 	return (
 		<div style={{backgroundColor: color, zIndex:998, top: `${top}px`, left: `${left}px`}} id={id} className="note" onDragEnd={dropNote} draggable="true">
-			<button onClick={() => deleteNote(id)}>delete</button>
+			<img onClick={() => deleteNote(id)}
+				className="edit-button" 
+				alt="edit" 
+				src="https://github.com/vanbietnguyen/notes-app/blob/dev/.github/cursor-png-1108.png?raw=true" 
+			/>
 			<pre className="text">{text}</pre>
 		</div>
 	)

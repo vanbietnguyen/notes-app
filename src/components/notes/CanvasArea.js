@@ -41,8 +41,9 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
       <Stage
         className="canvas-stage"
         ref={stageRef}
-        width={600}
-        height={600}
+        // style={{margin: '10vw'}}
+        width={window.innerWidth * .8}
+        height={window.innerHeight * .9}
         onMouseDown={handleMouseDown}
         onMousemove={handleMouseMove}
         onMouseup={handleMouseUp}
@@ -53,7 +54,7 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
             <Line
               key={i}
               points={line.points}
-              stroke="#df4b26"
+              stroke="#000000"
               strokeWidth={5}
               tension={0.5}
               lineCap="round"

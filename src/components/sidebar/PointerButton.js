@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
 
 
-const PointerButton = ({changePointer, changeClassName }) => {
+const PointerButton = ({changePointer, changeClassName, pointerClass }) => {
 
     const pointerRef = useRef(false)
 
     return (
         <div id="pointer"
             ref={pointerRef}
-            className="sidebar-button" 
+            className={pointerClass}
             onClick={() => {
                 changePointer()
                 changeClassName(pointerRef.current)

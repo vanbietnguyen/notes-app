@@ -4,18 +4,11 @@ import Notes from '../components/notes/Notes'
 import Sidebar from './Sidebar'
 import NotesModal from '../components/notes/NotesModal'
 import CanvasArea from '../components/notes/CanvasArea'
-import axios from 'axios';
 import NotesService from '../services/NotesService'
 import DrawingService from '../services/DrawingService'
 import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://localhost:8080";
 const socket = socketIOClient(ENDPOINT);
-
-// set up sockets whenever new notes occur and whenever we setNotes or Lines 
-// (on mouse up, change position, create note, deletenote, clear)
-
-// import services from '../services/services'
-
 
 const NotesContainer = () => {
   
@@ -70,7 +63,7 @@ const NotesContainer = () => {
                         closeModal={changeModal}
                     />
                     <div className="modalToggle">
-                        <Sidebar penClass='sidebar-button' />
+                        <Sidebar pointerClass='sidebar-button' />
                         <Notes notes={notes} setNotes={setNotes} socket={socket}/>
                         <CanvasArea  
                             drawPointer={drawPointer} 
@@ -91,7 +84,7 @@ const NotesContainer = () => {
                         setLines={setLines} 
                         openModal={changeModal}
                         socket={socket}
-                        penClass='sidebar-button active' 
+                        pointerClass='sidebar-button active' 
                     />
                     <Notes notes={notes} setNotes={setNotes} socket={socket} />
                     <CanvasArea  
@@ -101,8 +94,7 @@ const NotesContainer = () => {
                         setLines={setLines}
                         socket={socket}
                     />
-                </> }
-            
+                </> }  
         </div>
     )
 }

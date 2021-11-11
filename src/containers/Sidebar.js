@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import ClearButton from '../components/sidebar/ClearButton'
 import NotesButton from '../components/sidebar/NotesButton'
 import EraserButton from '../components/sidebar/EraserButton'
@@ -13,11 +13,10 @@ const Sidebar = props => {
             changePointer, 
             setLines, 
             socket, 
-            penClass } = props
+            pointerClass } = props
             
-    const [active, setActive] = useState('pen')
+    const [active, setActive] = useState('pointer')
     const changeClassName = (ref) => {
-        console.log(ref, 'ref')
         let id = ref.id
         if(active) {
             if(active.id === id) return;
@@ -33,10 +32,10 @@ const Sidebar = props => {
     return (
         <div id="sidebar">
             <NotesButton changeClassName={changeClassName} openModal={openModal} />
-            <PointerButton changePointer={changePointer} setActive={setActive} changeClassName={changeClassName}/>
+            <PointerButton pointerClass={pointerClass} changePointer={changePointer} setActive={setActive} changeClassName={changeClassName}/>
             <ClearButton notes={notes} setNotes={setNotes} setLines={setLines} socket={socket}/>
             <EraserButton changeTool={changeTool} changeClassName={changeClassName}/>
-            <PenButton penClass={penClass} changeTool={changeTool} changeClassName={changeClassName}/>
+            <PenButton changeTool={changeTool} changeClassName={changeClassName}/>
         </div>
     )
 };

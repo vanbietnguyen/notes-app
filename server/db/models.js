@@ -15,7 +15,7 @@ mongoose.connect(MONGO_URI, {
 const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({
-    text: {type: String, required: true},
+    text: {type: String },
     color: {type: String, required: true},
     top: {type: Number, required: true},
     left: {type: Number, required: true},

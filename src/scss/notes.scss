@@ -15,10 +15,10 @@
 .notes-modal {
     position: fixed;
     background-color: white;
-    width: 40vh;
-    height: 40vh;
-    border: solid;
-    padding: 25px;
+    border-radius: 5%;
+    width: 60vh;
+    height: 50vh;
+    border: .5px solid lightgray;
     top: 50%;
     left: 50%;
   /* bring your own prefixes */
@@ -28,9 +28,7 @@
 
 
 form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
 }
 
 
@@ -56,4 +54,45 @@ form {
     opacity: .5;
     z-index: -1;
     pointer-events: none;
+}
+
+textarea  {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding: 1rem;
+  /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    border: none;
+    outline: none;
+    width: 59.5vh;
+    height: 27vh;
+    margin: 0;
+}
+
+.form-buttons {
+    position: fixed;
+    display: inline;
+    width: 60vh;
+    top: 88%;
+    left: 66%;
+  /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
+.form-button {
+    text-decoration: none;
+    margin: 10px;
+    width: 8em;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: transparent;
+    padding: 12px 16px;
+    border: solid 1px;
+    border-radius: 5px;
+    color: rgb(121, 121, 121);
+}
+
+.edit-button {
+    width: 10px;
 }

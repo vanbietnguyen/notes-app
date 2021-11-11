@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 
 
-const PenButton = ({ changeTool, changeClassName, penClass }) => {
+const PenButton = ({ changeTool, changeClassName }) => {
     const penRef = useRef(false)
    
 
@@ -9,9 +9,9 @@ const PenButton = ({ changeTool, changeClassName, penClass }) => {
         <div 
             id="pen" 
             ref={penRef} 
-            className={penClass}
+            className="sidebar-button"
             onClick={() => {
-                changeTool()
+                changeTool('pen')
                 changeClassName(penRef.current)
             }}
         >

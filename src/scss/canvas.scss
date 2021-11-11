@@ -1,8 +1,11 @@
 
 .canvas-stage {
     position: relative;
-    left: 5vw;
-    width: 85vw;
+    left: 10vw;
+    margin-right:30vw;
+    right: 10vw;
+    width: 80vw;
     height: 90vh;
     z-index: -1;
+    border: solid gray 1px;
 }

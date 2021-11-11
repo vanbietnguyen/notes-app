@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { CirclePicker } from 'react-color';
 import NotesService from '../../services/NotesService'
-import axios from 'axios'
 
 const NotesModal = ({ notes, setNotes, closeModal, socket }) => {
     // take the value from target and set it as the value sent back to notes
@@ -35,8 +34,13 @@ const NotesModal = ({ notes, setNotes, closeModal, socket }) => {
             </div>
             
             <form>
-                <textarea  id="note-text-area" onChange={(e)=> setNotesInput(e.target.value)} placeholder="what's on your mind?"></textarea>
-                <input onClick={(e) => addNote(e)} value="+" type="submit"></input>
+                <textarea style={{backgroundColor: color}}id="note-text-area" onChange={(e)=> setNotesInput(e.target.value)} placeholder="what's on your mind?"></textarea>
+                <br/>
+                <div className="form-buttons"> 
+                    <input className="form-button" onClick={(e) => closeModal()} value="cancel" type="submit"></input>
+                    <input className="form-button" onClick={(e) => addNote(e)} value="submit" type="submit"></input>
+                </div>
+               
             </form>
         </div>
     )
