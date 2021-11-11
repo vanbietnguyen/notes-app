@@ -5,7 +5,6 @@ import Sidebar from './Sidebar'
 import NotesModal from '../components/notes/NotesModal'
 import CanvasArea from '../components/notes/CanvasArea'
 import axios from 'axios';
-
 import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://localhost:8080";
 const socket = socketIOClient(ENDPOINT);
@@ -16,34 +15,17 @@ const socket = socketIOClient(ENDPOINT);
 
 
 const NotesContainer = () => {
-    // websockets testing
-    const [response, setResponse] = useState("");
-
+  
     const [notes, setNotes] = useState([])
     const [showModal, setModal] = useState(false)
     const [drawPointer, setDrawPointer] = useState(false)
     const [lines, setLines] = useState([]);
     const [tool, setTool] = useState("eraser")
-
-    // websockets testing
-    useEffect(async() => {
-        socket.on("FromAPI", data => {
-            setResponse(data);
-            console.log(data, 'res from sockets in frontend')
-          });
-    }, [])
-
+    
     useEffect(async() => {
         let result = await axios.get('api/notes/')
         setNotes(result.data);
     }, [])
-
-    // setting Notes based on listeners
-    useEffect(() => {
-        socket.on("add", (data) => {
-          setNotes([...notes, data]); 
-        });
-      }, [socket, notes, setNotes]);
 
     useEffect(async() => {
         let result = await axios.get('api/lines/')
@@ -54,6 +36,21 @@ const NotesContainer = () => {
         }
         setLines(result.data)
     }, [])
+
+    // websockets listeners
+    useEffect(() => {
+        socket.on("addNotes", (data) => setNotes([data]));
+        socket.on("changePos", (data) => setNotes(data));
+        socket.on("deleteNotes", (data) => setNotes(data));
+        socket.on("startLines", (data) => setLines(data))
+        socket.on("drawing", (data) => setLines(data));
+        socket.on("clearAll", () => {
+            setNotes([])
+            setLines([])
+        });
+    }, [socket]);
+
+
 
     const changeModal = () => {
         if(drawPointer) setDrawPointer(false)
@@ -76,7 +73,6 @@ const NotesContainer = () => {
 
     return (
         <div className="notes-container">
-            {response}
             { showModal ? 
                 <>
                     <NotesModal
@@ -87,7 +83,6 @@ const NotesContainer = () => {
                     />
                     <div className="modalToggle">
                         <Sidebar
-                            socket={socket} 
                             changePointer={changePointer} 
                             notes={notes} 
                             changeTool={changeTool} 
@@ -95,9 +90,8 @@ const NotesContainer = () => {
                             setLines={setLines} 
                             openModal={changeModal} 
                         />
-                        <Notes socket={socket} notes={notes} setNotes={setNotes} />
-                        <CanvasArea
-                            socket={socket}   
+                        <Notes notes={notes}/>
+                        <CanvasArea  
                             drawPointer={drawPointer} 
                             tool={tool} 
                             lines={lines} 
@@ -114,14 +108,16 @@ const NotesContainer = () => {
                         changeTool={changeTool} 
                         setNotes={setNotes} 
                         setLines={setLines} 
-                        openModal={changeModal} 
+                        openModal={changeModal}
+                        socket={socket} 
                     />
-                    <Notes notes={notes} setNotes={setNotes} />
+                    <Notes notes={notes} setNotes={setNotes} socket={socket} />
                     <CanvasArea  
                         drawPointer={drawPointer} 
                         tool={tool} 
                         lines={lines} 
                         setLines={setLines}
+                        socket={socket}
                     />
                 </> }
             

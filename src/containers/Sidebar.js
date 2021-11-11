@@ -5,7 +5,7 @@ import EraserButton from '../components/sidebar/EraserButton'
 import PenButton from '../components/sidebar/PenButton'
 import PointerButton from '../components/sidebar/PointerButton'
 
-const Sidebar = ({ notes, setNotes, openModal, changeTool, changePointer, setLines, lines }) => {
+const Sidebar = ({ notes, setNotes, openModal, changeTool, changePointer, setLines, socket }) => {
     // const [active, setActive] => useState()
     // const setActive = () =>
     // set active will find the div based on document selector or ref? change the className to create a toggle
@@ -14,7 +14,7 @@ const Sidebar = ({ notes, setNotes, openModal, changeTool, changePointer, setLin
         <div id="sidebar">
             <NotesButton openModal={openModal} />
             <PointerButton changePointer={changePointer} />
-            <ClearButton notes={notes} setNotes={setNotes} setLines={setLines}/>
+            <ClearButton notes={notes} setNotes={setNotes} setLines={setLines} socket={socket}/>
             <EraserButton changeTool={changeTool} />
             <PenButton changeTool={changeTool} />
         </div>

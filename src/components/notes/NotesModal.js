@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { CirclePicker } from 'react-color';
-import service from '../../services/services'
+import NotesService from '../../services/NotesService'
 import axios from 'axios'
 
 const NotesModal = ({ notes, setNotes, closeModal, socket }) => {
     // take the value from target and set it as the value sent back to notes
     const [notesInput, setNotesInput] = useState('')
     const [color, setColor] = useState('#68B6D9')
-
+    
     const addNote = async (e) => {
         e.preventDefault()
-        
-        let textArea = document.querySelector('#note-text-area')
-        textArea.value = ''
 
         let note = {
             'text': notesInput,
@@ -21,8 +18,7 @@ const NotesModal = ({ notes, setNotes, closeModal, socket }) => {
             'left': '300',
         }
 
-        let result = await axios.post('api/notes/add', note)
-        socket.emit("modify", result.data)
+        NotesService.addNote(e, setNotes, notes, note, socket)
         closeModal()
     };
         
@@ -38,7 +34,6 @@ const NotesModal = ({ notes, setNotes, closeModal, socket }) => {
 
             </div>
             
-
             <form>
                 <textarea  id="note-text-area" onChange={(e)=> setNotesInput(e.target.value)} placeholder="what's on your mind?"></textarea>
                 <input onClick={(e) => addNote(e)} value="+" type="submit"></input>

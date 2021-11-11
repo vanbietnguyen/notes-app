@@ -2,8 +2,9 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Line } from 'react-konva';
+import DrawingService from '../../services/DrawingService';
 
-const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLines}) => {
+const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLines, socket}) => {
 
   const isDrawing = useRef(false);
   const stageRef = useRef(false)
@@ -11,42 +12,27 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
 
   useEffect(() => {
     if(!lines.length) startOver(stageRef.current)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lines])
 
-  const startOver = (stage) => {
-    if(lines.length) return
-    stage.clear()
-  }
+  const startOver = (stage) => stage.clear()
 
   const handleMouseDown = (e) => {
-    if(!drawPointer) return 
+    if(!drawPointer) return
     isDrawing.current = true;
-    const pos = e.target.getStage().getPointerPosition();
-    setLines([...lines, { tool, points: [pos.x, pos.y] }]);
+    DrawingService.mouseDown(e, lines, tool, setLines)
+    socket.emit("startLines", lines)   
   };
 
   const handleMouseMove = (e) => {
-    // no drawing - skipping
-    if (!isDrawing.current) {
-      return;
-    }
-    const stage = e.target.getStage();
-
-    const point = stage.getPointerPosition();
-    let lastLine = lines[lines.length - 1];
-    // add point
-    lastLine.points = lastLine.points.concat([point.x, point.y]);
-
-    // replace last
-    lines.splice(lines.length - 1, 1, lastLine);
-    setLines(lines.concat());
+    if (!isDrawing.current) return;
+    DrawingService.mouseMove(e, lines, setLines)
+    DrawingService.throttle(400, socket.emit('drawing', lines))
   };
 
   const handleMouseUp = (e) => {
-    // send lines to backend here
     let line = lines[lines.length - 1]
     axios.post('api/lines/add', { line })
-    
     isDrawing.current = false;
   }
 
