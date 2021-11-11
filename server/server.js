@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // index
-app.get('/', (req, res) => res.sendStatus(200));
+app.get('/', (req, res) => res.send('server is up and running'));
 
 
 //routers
