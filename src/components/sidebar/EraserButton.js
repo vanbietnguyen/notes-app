@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 
-const EraserButton = ({changeTool}) => {
+const EraserButton = ({changeTool, changeClassName}) => {
+    const eraserRef = useRef(false)
 
     return (
-        <div className="sidebar-button" onClick={() => changeTool('eraser')}>
-            <img className="button-img" alt="eraser" src="" />
+        <div id="eraser" 
+            ref={eraserRef}
+            className="sidebar-button" 
+            onClick={() => {
+                changeClassName(eraserRef.current)
+                changeTool('eraser')
+            }}>
+            <img 
+                
+                className="button-img" 
+                alt="eraser" 
+                src="https://github.com/vanbietnguyen/notes-app/blob/dev/.github/eraser.png?raw=true" 
+            />
         </div>
     )
 }

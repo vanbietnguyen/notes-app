@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 
-const PenButton = ({changeTool}) => {
+const PenButton = ({ changeTool, changeClassName, penClass }) => {
+    const penRef = useRef(false)
+   
 
     return (
-        <div className="sidebar-button" onClick={() => changeTool('pen')}>
-            <img className="button-img" alt="pen" src="" />
+        <div 
+            id="pen" 
+            ref={penRef} 
+            className={penClass}
+            onClick={() => {
+                changeTool()
+                changeClassName(penRef.current)
+            }}
+        >
+            <img 
+                className="button-img" 
+                alt="pen" 
+                src="https://github.com/vanbietnguyen/notes-app/blob/dev/.github/pen.png?raw=true" 
+            />
         </div>
     )
 }

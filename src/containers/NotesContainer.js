@@ -30,16 +30,6 @@ const NotesContainer = () => {
         DrawingService.getLines(setLines)
     }, [])
 
-    // useEffect(async() => {
-    //     let result = await axios.get('api/lines/')
-
-    //     for(let line of result.data) {
-    //         delete line._id
-    //         delete line.__v
-    //     }
-    //     setLines(result.data)
-    // }, [])
-
     // websockets listeners
     useEffect(() => {
         socket.on("modifyNotes", (data) => setNotes(data));
@@ -49,8 +39,6 @@ const NotesContainer = () => {
             setLines([])
         });
     }, [socket]);
-
-
 
     const changeModal = () => {
         if(drawPointer) setDrawPointer(false)
@@ -82,7 +70,7 @@ const NotesContainer = () => {
                         closeModal={changeModal}
                     />
                     <div className="modalToggle">
-                        <Sidebar />
+                        <Sidebar penClass='sidebar-button' />
                         <Notes notes={notes} setNotes={setNotes} socket={socket}/>
                         <CanvasArea  
                             drawPointer={drawPointer} 
@@ -102,7 +90,8 @@ const NotesContainer = () => {
                         setNotes={setNotes} 
                         setLines={setLines} 
                         openModal={changeModal}
-                        socket={socket} 
+                        socket={socket}
+                        penClass='sidebar-button active' 
                     />
                     <Notes notes={notes} setNotes={setNotes} socket={socket} />
                     <CanvasArea  
