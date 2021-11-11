@@ -9,13 +9,13 @@ const config = {
     db: {
       host: process.env.DB_HOST,
     },
-    SERVER_URI: 'localhost:5000'
+    SERVER_URI: 'http://localhost:8080'
   },
   production: {
     db: {
       host: process.env.DB_HOST,
     },
-    SERVER_URI: 'https://koala-notes-app.herokuapp.com/',
+    SERVER_URI: process.env.HEROKU_URI,
   },
 };
 
