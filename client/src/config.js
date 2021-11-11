@@ -16,7 +16,7 @@ const config = {
     db: {
       host: process.env.DB_HOST,
     },
-    SERVER_URI: 'HEROKU_URI',
+    SERVER_URI: 'https://koala-notes-app.herokuapp.com/',
   },
 };
 
