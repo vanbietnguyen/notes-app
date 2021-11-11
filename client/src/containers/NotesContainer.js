@@ -7,9 +7,10 @@ import CanvasArea from '../components/notes/CanvasArea'
 import NotesService from '../services/NotesService'
 import DrawingService from '../services/DrawingService'
 import socketIOClient from "socket.io-client";
+import config from '../config.js'
 // process.env
 // const ENDPOINT = process.env.REACT_APP_ENDPOINT || "http://localhost:8080";
-const ENDPOINT = "https://koala-notes-app.herokuapp.com/";
+const ENDPOINT = config.SERVER_URI;
 
 const socket = socketIOClient(ENDPOINT);
 
