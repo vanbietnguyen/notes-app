@@ -21,13 +21,11 @@ const Sidebar = props => {
         if(active) {
             if(active.id === id) return;
             let activeEle = document.querySelector(`#${active}`)
-            console.log(activeEle.className, 'active')
             activeEle.className = 'sidebar-button'
         }
 
         setActive(id)
         ref.className = `${ref.className} active`
-        console.log(ref.className, 'classname ref')
     }
     return (
         <div id="sidebar">

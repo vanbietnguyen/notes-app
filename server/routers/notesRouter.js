@@ -1,8 +1,6 @@
 const express = require('express');
 const notesController = require('../controllers/notesController.js');
 const router = express.Router();
-
-//instead of adding individual notes, i can just remove an entire array of notes
  
 router.get('/', notesController.get, (req, res) => {
   const result = res.locals.notes

@@ -3,7 +3,7 @@ import { CirclePicker } from 'react-color';
 import NotesService from '../../services/NotesService'
 
 const NotesModal = ({ notes, setNotes, closeModal, socket }) => {
-    // take the value from target and set it as the value sent back to notes
+
     const [notesInput, setNotesInput] = useState('')
     const [color, setColor] = useState('#68B6D9')
     
@@ -45,7 +45,5 @@ const NotesModal = ({ notes, setNotes, closeModal, socket }) => {
         </div>
     )
 }
-
-// onChange={(e)=> setNotesInput(e.target.value)}
 
 export default NotesModal;

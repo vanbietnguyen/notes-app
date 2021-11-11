@@ -51,7 +51,6 @@ class NotesService {
 
         let w = window.innerWidth;
         let h = window.innerHeight;
-        console.log(w, )
 
         let minWidth = (9 * w) / 100;
         // let minWidth = 129
