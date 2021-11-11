@@ -20,7 +20,7 @@ router.post('/update', notesController.update, (req, res) => {
 
 router.post('/delete', notesController.delete, (req, res) => res.status(200))
 
-router.post('/clear', notesController.clear, (req, res) => res.status(200))
+router.post('/clearNotesLines', notesController.clear, (req, res) => res.status(200))
 
 
 

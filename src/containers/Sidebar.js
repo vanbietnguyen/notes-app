@@ -5,7 +5,15 @@ import EraserButton from '../components/sidebar/EraserButton'
 import PenButton from '../components/sidebar/PenButton'
 import PointerButton from '../components/sidebar/PointerButton'
 
-const Sidebar = ({ notes, setNotes, openModal, changeTool, changePointer, setLines, socket }) => {
+const Sidebar = props => {
+    const { notes,
+            setNotes, 
+            openModal, 
+            changeTool, 
+            changePointer, 
+            setLines, 
+            socket } = props
+            
     // const [active, setActive] => useState()
     // const setActive = () =>
     // set active will find the div based on document selector or ref? change the className to create a toggle

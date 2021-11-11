@@ -21,7 +21,7 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
     if(!drawPointer) return
     isDrawing.current = true;
     DrawingService.mouseDown(e, lines, tool, setLines)
-    socket.emit("startLines", lines)   
+    socket.emit("drawing", lines)   
   };
 
   const handleMouseMove = (e) => {
@@ -30,9 +30,9 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
     DrawingService.throttle(400, socket.emit('drawing', lines))
   };
 
-  const handleMouseUp = (e) => {
+  const handleMouseUp = () => {
     let line = lines[lines.length - 1]
-    axios.post('api/lines/add', { line })
+    DrawingService.mouseUp(line)
     isDrawing.current = false;
   }
 

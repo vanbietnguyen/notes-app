@@ -5,13 +5,27 @@ class NotesService {
     static async addNote(e, setNotes, notes, note,socket) {
         let textArea = document.querySelector('#note-text-area')
         textArea.value = ''
-        let result = await axios.post('api/notes/add', note)
-        setNotes([...notes, result.data])
-        socket.emit("addNotes", result.data)
+
+        try {
+            let result = await axios.post('api/notes/add', note)
+            let newNotes = [...notes, result.data]
+            setNotes(newNotes)
+            socket.emit("modifyNotes", newNotes)
+        } catch(e) {
+            return e
+        }
     }
 
-    static async clearAll() {
-
+    static async clearAll(setLines, setNotes, socket) {
+        setLines([])
+        setNotes([])
+        socket.emit("clearAll")
+        try {
+            await axios.post('api/notes/clearNotesLines')
+        } catch(e) {
+            return e
+        }
+        
     }
 
     static async deleteNote(_id, notes, setNotes, socket) {
@@ -21,8 +35,13 @@ class NotesService {
         }, [])
 
         setNotes(newNotes)
-        socket.emit("deleteNotes", newNotes);
-        await axios.post('api/notes/delete', { _id })
+        socket.emit("modifyNotes", newNotes);
+        try {
+            await axios.post('api/notes/delete', { _id })
+        } catch(e) {
+            return e
+        }
+        
         
     }
     static async dropNote(e, notes, setNotes, socket) {
@@ -52,8 +71,22 @@ class NotesService {
         note[0].top = top
         let newNotes = [...other, ...note]
         setNotes(newNotes)
-        await axios.post('api/notes/update', { id, left, top })
-        socket.emit("changePos", notes)
+        
+        try {
+            await axios.post('api/notes/update', { id, left, top })
+            socket.emit("modifyNotes", newNotes)
+        } catch(e) {
+            return e
+        }
+        
+    }
+    static async getNotes(setNotes) {
+        try {
+            let result = await axios.get('api/notes/')
+            setNotes(result.data);    
+        } catch (e) {
+            return e
+        }
     }
 
 }

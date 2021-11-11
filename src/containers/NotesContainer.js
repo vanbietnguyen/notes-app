@@ -5,9 +5,12 @@ import Sidebar from './Sidebar'
 import NotesModal from '../components/notes/NotesModal'
 import CanvasArea from '../components/notes/CanvasArea'
 import axios from 'axios';
+import NotesService from '../services/NotesService'
+import DrawingService from '../services/DrawingService'
 import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://localhost:8080";
 const socket = socketIOClient(ENDPOINT);
+
 // set up sockets whenever new notes occur and whenever we setNotes or Lines 
 // (on mouse up, change position, create note, deletenote, clear)
 
@@ -23,26 +26,23 @@ const NotesContainer = () => {
     const [tool, setTool] = useState("eraser")
     
     useEffect(async() => {
-        let result = await axios.get('api/notes/')
-        setNotes(result.data);
+        NotesService.getNotes(setNotes)
+        DrawingService.getLines(setLines)
     }, [])
 
-    useEffect(async() => {
-        let result = await axios.get('api/lines/')
+    // useEffect(async() => {
+    //     let result = await axios.get('api/lines/')
 
-        for(let line of result.data) {
-            delete line._id
-            delete line.__v
-        }
-        setLines(result.data)
-    }, [])
+    //     for(let line of result.data) {
+    //         delete line._id
+    //         delete line.__v
+    //     }
+    //     setLines(result.data)
+    // }, [])
 
     // websockets listeners
     useEffect(() => {
-        socket.on("addNotes", (data) => setNotes([data]));
-        socket.on("changePos", (data) => setNotes(data));
-        socket.on("deleteNotes", (data) => setNotes(data));
-        socket.on("startLines", (data) => setLines(data))
+        socket.on("modifyNotes", (data) => setNotes(data));
         socket.on("drawing", (data) => setLines(data));
         socket.on("clearAll", () => {
             setNotes([])
@@ -82,15 +82,8 @@ const NotesContainer = () => {
                         closeModal={changeModal}
                     />
                     <div className="modalToggle">
-                        <Sidebar
-                            changePointer={changePointer} 
-                            notes={notes} 
-                            changeTool={changeTool} 
-                            setNotes={setNotes} 
-                            setLines={setLines} 
-                            openModal={changeModal} 
-                        />
-                        <Notes notes={notes}/>
+                        <Sidebar />
+                        <Notes notes={notes} setNotes={setNotes} socket={socket}/>
                         <CanvasArea  
                             drawPointer={drawPointer} 
                             tool={tool} 
