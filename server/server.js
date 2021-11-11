@@ -28,6 +28,7 @@ let io = socket(server, {
   // or process.env
   cors: {
     // origin: "http://localhost:3000",
+    // changed origin
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
   }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../../config.js'
 
 class NotesService {
     
@@ -84,7 +85,7 @@ class NotesService {
     }
     static async getNotes(setNotes) {
         try {
-            let result = await axios.get('api/notes/')
+            let result = await axios.get(`${config.SERVER_URI}api/notes/`)
             setNotes(result.data);    
         } catch (e) {
             return e

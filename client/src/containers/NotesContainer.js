@@ -9,7 +9,7 @@ import DrawingService from '../services/DrawingService'
 import socketIOClient from "socket.io-client";
 // process.env
 // const ENDPOINT = process.env.REACT_APP_ENDPOINT || "http://localhost:8080";
-const ENDPOINT = "http://koala-notes-app.herokuapp.com/";
+const ENDPOINT = "https://koala-notes-app.herokuapp.com/";
 
 const socket = socketIOClient(ENDPOINT);
 

@@ -43,3 +43,9 @@
    filter: invert(1);
    background-color:#fafafa;
 }
+
+.sidebar-button:focus {  
+    -webkit-filter: invert(1);
+   filter: invert(1);
+   background-color:#fafafa;
+}
