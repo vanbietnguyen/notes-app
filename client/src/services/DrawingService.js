@@ -1,9 +1,10 @@
 import axios from 'axios'
+import config from '../config.js'
 
 class DrawingService {
   static async getLines(setLines) {
     try {
-      let result = await axios.get('api/lines/')
+      let result = await axios.get(`${config.SERVER_URI}api/lines/`)
 
       for(let line of result.data) {
           delete line._id
@@ -36,7 +37,7 @@ class DrawingService {
 
   static async mouseUp(line) {
     try {
-      await axios.post('api/lines/add', { line })
+      await axios.post(`${config.SERVER_URI}api/lines/add`, { line })
     } catch(e) {
       return e
     }

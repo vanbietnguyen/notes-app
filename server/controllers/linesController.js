@@ -37,7 +37,6 @@ linesController.update = async (req, res, next) => {
 
 linesController.delete = async (req, res, next) => {
   try {
-    console.log(req.body, 'reqbody in delete')
     const { _id } = req.body;
     await models.Note.deleteOne({ _id });
 

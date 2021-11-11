@@ -7,8 +7,9 @@ import CanvasArea from '../components/notes/CanvasArea'
 import NotesService from '../services/NotesService'
 import DrawingService from '../services/DrawingService'
 import socketIOClient from "socket.io-client";
-// process.env
-const ENDPOINT = process.env.REACT_APP_ENDPOINT || "http://localhost:8080";
+import config from '../config.js'
+
+const ENDPOINT = config.SERVER_URI;
 
 const socket = socketIOClient(ENDPOINT);
 
@@ -42,7 +43,6 @@ const NotesContainer = () => {
 
     const changePointer = () => {
         let canvas = document.querySelector('.canvas-stage')
-        // set canvas to back
         if(drawPointer) canvas.style.zIndex = -1
         setDrawPointer(false)
     }

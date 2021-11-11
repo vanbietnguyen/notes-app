@@ -28,7 +28,6 @@ notesController.add = async (req, res, next) => {
 }
 
 notesController.update = async (req, res, next) => {
-    // takes in form data and updates the User document
     try {
       const { id, ...rest } = req.body
       await models.Note.findOneAndUpdate({ _id: id }, rest)

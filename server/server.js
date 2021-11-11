@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // index
-app.get('/', (req, res) => res.sendStatus(200));
+app.get('/', (req, res) => res.send('server is up and running'));
 
 
 //routers
@@ -22,10 +22,7 @@ app.use('/api/lines', linesRouter)
 
 let server = app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
-// transports: ["websocket", "polling"]
 let io = socket(server, {
-  // how to change cors settings? or maybe just do regular polling configurations? change to new domain perhaps
-  // or process.env
   cors: {
     // origin: "http://localhost:3000",
     origin: "*",

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../config.js'
 
 class NotesService {
     
@@ -7,7 +8,7 @@ class NotesService {
         textArea.value = ''
 
         try {
-            let result = await axios.post('api/notes/add', note)
+            let result = await axios.post(`${config.SERVER_URI}api/notes/add`, note)
             let newNotes = [...notes, result.data]
             setNotes(newNotes)
             socket.emit("modifyNotes", newNotes)
@@ -21,7 +22,7 @@ class NotesService {
         setNotes([])
         socket.emit("clearAll")
         try {
-            await axios.post('api/notes/clearNotesLines')
+            await axios.post(`${config.SERVER_URI}api/notes/clearNotesLines`)
         } catch(e) {
             return e
         }
@@ -37,7 +38,7 @@ class NotesService {
         setNotes(newNotes)
         socket.emit("modifyNotes", newNotes);
         try {
-            await axios.post('api/notes/delete', { _id })
+            await axios.post(`${config.SERVER_URI}api/notes/delete`, { _id })
         } catch(e) {
             return e
         }
@@ -50,7 +51,6 @@ class NotesService {
 
         let w = window.innerWidth;
         let h = window.innerHeight;
-        console.log(w, )
 
         let minWidth = (9 * w) / 100;
         // let minWidth = 129
@@ -75,7 +75,7 @@ class NotesService {
         setNotes(newNotes)
         
         try {
-            await axios.post('api/notes/update', { id, left, top })
+            await axios.post(`${config.SERVER_URI}api/notes/update`, { id, left, top })
             socket.emit("modifyNotes", newNotes)
         } catch(e) {
             return e
@@ -84,7 +84,7 @@ class NotesService {
     }
     static async getNotes(setNotes) {
         try {
-            let result = await axios.get('api/notes/')
+            let result = await axios.get(`${config.SERVER_URI}api/notes/`)
             setNotes(result.data);    
         } catch (e) {
             return e

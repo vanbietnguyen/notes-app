@@ -41,7 +41,6 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
       <Stage
         className="canvas-stage"
         ref={stageRef}
-        // style={{margin: '10vw'}}
         width={window.innerWidth * .8}
         height={window.innerHeight * .9}
         onMouseDown={handleMouseDown}
