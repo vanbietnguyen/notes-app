@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 8080
+const PORT = process.env.PORT || 8080;
 const cors = require('cors')
 const socket = require('socket.io')
 
@@ -22,9 +22,13 @@ app.use('/api/lines', linesRouter)
 
 let server = app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
+// transports: ["websocket", "polling"]
 let io = socket(server, {
+  // how to change cors settings? or maybe just do regular polling configurations? change to new domain perhaps
+  // or process.env
   cors: {
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
   }
 })

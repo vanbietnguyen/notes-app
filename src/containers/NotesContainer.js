@@ -7,7 +7,9 @@ import CanvasArea from '../components/notes/CanvasArea'
 import NotesService from '../services/NotesService'
 import DrawingService from '../services/DrawingService'
 import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://localhost:8080";
+// process.env
+const ENDPOINT = process.env.REACT_APP_ENDPOINT || "http://localhost:8080";
+
 const socket = socketIOClient(ENDPOINT);
 
 const NotesContainer = () => {

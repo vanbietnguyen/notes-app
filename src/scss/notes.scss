@@ -1,15 +1,17 @@
 .note {
     position: fixed;
-    // position: absolute;
     cursor: pointer;
-    // visibility: hidden;
-    background-color: transparent blue;
-    // top: 100px;
-    // left: 300px;
     height: 25vh;
     width: 25vh;
-    padding: 20px;
-    z-index: 999;
+    padding: 15px;
+    z-index: 990;
+    float: right;
+}
+
+.text {
+    // display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-wrap: break-all;
 }
 
 .notes-modal {
@@ -57,6 +59,8 @@ form {
 }
 
 textarea  {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -94,5 +98,16 @@ textarea  {
 }
 
 .edit-button {
-    width: 10px;
+    // position: absolute;
+    // right: 9%;
+    width: 20px;
+}
+
+#submit:hover {
+    background-color: rgb(70, 124, 242);
+    color: white;
+}
+
+#cancel:hover {
+    background-color: #fafafa;
 }

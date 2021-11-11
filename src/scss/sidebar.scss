@@ -6,11 +6,12 @@
     cursor: pointer;
     border: solid lightgray .25px;
     border-radius: 25px;
-    top: 20%;
-    height: 60vh;
+    top: 15%;
+    height: 70vh;
     width: 70px;
     margin-right: 10vh;
-    z-index: 99;
+    z-index: 999;
+    background-color: white;
 }
 
 .sidebar-button {
@@ -34,9 +35,11 @@
 }
 
 .sidebar-button:hover {
-    background-color: lightgray;
+    background-color:#e2dede;
 }
 
-.active {
-    background-color: lightgray;
+.active {  
+    -webkit-filter: invert(1);
+   filter: invert(1);
+   background-color:#fafafa;
 }

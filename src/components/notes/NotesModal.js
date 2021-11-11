@@ -37,8 +37,8 @@ const NotesModal = ({ notes, setNotes, closeModal, socket }) => {
                 <textarea style={{backgroundColor: color}}id="note-text-area" onChange={(e)=> setNotesInput(e.target.value)} placeholder="what's on your mind?"></textarea>
                 <br/>
                 <div className="form-buttons"> 
-                    <input className="form-button" onClick={(e) => closeModal()} value="cancel" type="submit"></input>
-                    <input className="form-button" onClick={(e) => addNote(e)} value="submit" type="submit"></input>
+                    <input id="cancel" className="form-button" onClick={(e) => closeModal()} value="cancel" type="submit"></input>
+                    <input id="submit" className="form-button" onClick={(e) => addNote(e)} value="submit" type="submit"></input>
                 </div>
                
             </form>

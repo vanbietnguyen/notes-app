@@ -50,16 +50,18 @@ class NotesService {
 
         let w = window.innerWidth;
         let h = window.innerHeight;
+        console.log(w, )
 
-        let minWidth = (0 * w) / 100;
-        let minHeight = (0 * h) / 100;
-        let maxWidth = (85 * w) / 100;
-        let maxHeight = (80 * h) / 100;
+        let minWidth = (9 * w) / 100;
+        // let minWidth = 129
+        let minHeight = (15 * h) / 100;
+        let maxWidth = (84 * w) / 100;
+        let maxHeight = (76 * h) / 100;
 
-        if(left < 0) left = minWidth - 25
-        if(left > maxWidth) left = maxWidth - 210
-        if(top < 0) top = minHeight - 25
-        if(top > maxHeight) top = maxHeight - 130
+        if(left < minWidth) left = minWidth + 50
+        if(left > maxWidth) left = maxWidth - 50
+        if(top < 0) top = minHeight + 50
+        if(top > maxHeight) top = maxHeight - 50
 
         e.target.style.left = `${left}px`;
         e.target.style.top = `${top}px`;

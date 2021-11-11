@@ -8,7 +8,7 @@ const Note = ({ text, id, color, deleteNote, dropNote, top, left }) => {
 			<img onClick={() => deleteNote(id)}
 				className="edit-button" 
 				alt="edit" 
-				src="https://github.com/vanbietnguyen/notes-app/blob/dev/.github/cursor-png-1108.png?raw=true" 
+				src="https://github.com/vanbietnguyen/notes-app/blob/dev/.github/xbutton.png?raw=true" 
 			/>
 			<pre className="text">{text}</pre>
 		</div>

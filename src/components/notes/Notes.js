@@ -1,6 +1,5 @@
 import React from 'react';
 import Note from './Note'
-import axios from 'axios'
 import NotesService from '../../services/NotesService'
 
 const Notes = ({ notes, setNotes, socket }) => {
