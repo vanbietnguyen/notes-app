@@ -4,7 +4,9 @@ import React from 'react';
 const PenButton = ({changeTool}) => {
 
     return (
-        <input className="sidebar-button" value="pen" type="submit" onClick={() => changeTool('pen')}/>
+        <div className="sidebar-button" onClick={() => changeTool('pen')}>
+            <img className="button-img" alt="pen" src="" />
+        </div>
     )
 }
 

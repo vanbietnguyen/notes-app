@@ -1,36 +1,56 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Notes from '../components/notes/Notes'
 import Sidebar from './Sidebar'
 import NotesModal from '../components/notes/NotesModal'
 import CanvasArea from '../components/notes/CanvasArea'
 import axios from 'axios';
+import NotesService from '../services/NotesService'
+import DrawingService from '../services/DrawingService'
+import socketIOClient from "socket.io-client";
+const ENDPOINT = "http://localhost:8080";
+const socket = socketIOClient(ENDPOINT);
+
+// set up sockets whenever new notes occur and whenever we setNotes or Lines 
+// (on mouse up, change position, create note, deletenote, clear)
+
 // import services from '../services/services'
 
-const NotesContainer = () => {
 
+const NotesContainer = () => {
+  
     const [notes, setNotes] = useState([])
     const [showModal, setModal] = useState(false)
     const [drawPointer, setDrawPointer] = useState(false)
     const [lines, setLines] = useState([]);
     const [tool, setTool] = useState("eraser")
-
-    useEffect(async() => {
-        let notes = await axios.get('api/notes/')
-        setNotes(notes.data)
-    }, [])
-
-    useEffect(async() => {
-        let result = await axios.get('api/lines/')
-
-        for(let line of result.data) {
-            delete line._id
-            delete line.__v
-        }
-        setLines(result.data)
-    }, [])
     
-    // set lines from db here
+    useEffect(async() => {
+        NotesService.getNotes(setNotes)
+        DrawingService.getLines(setLines)
+    }, [])
+
+    // useEffect(async() => {
+    //     let result = await axios.get('api/lines/')
+
+    //     for(let line of result.data) {
+    //         delete line._id
+    //         delete line.__v
+    //     }
+    //     setLines(result.data)
+    // }, [])
+
+    // websockets listeners
+    useEffect(() => {
+        socket.on("modifyNotes", (data) => setNotes(data));
+        socket.on("drawing", (data) => setLines(data));
+        socket.on("clearAll", () => {
+            setNotes([])
+            setLines([])
+        });
+    }, [socket]);
+
+
 
     const changeModal = () => {
         if(drawPointer) setDrawPointer(false)
@@ -53,25 +73,18 @@ const NotesContainer = () => {
 
     return (
         <div className="notes-container">
-            
             { showModal ? 
                 <>
                     <NotesModal
+                        socket={socket}
                         notes={notes} 
                         setNotes={setNotes} 
                         closeModal={changeModal}
                     />
                     <div className="modalToggle">
-                        <Sidebar 
-                            changePointer={changePointer} 
-                            notes={notes} 
-                            changeTool={changeTool} 
-                            setNotes={setNotes} 
-                            setLines={setLines} 
-                            openModal={changeModal} 
-                        />
-                        <Notes notes={notes} setNotes={setNotes} />
-                        <CanvasArea   
+                        <Sidebar />
+                        <Notes notes={notes} setNotes={setNotes} socket={socket}/>
+                        <CanvasArea  
                             drawPointer={drawPointer} 
                             tool={tool} 
                             lines={lines} 
@@ -88,14 +101,16 @@ const NotesContainer = () => {
                         changeTool={changeTool} 
                         setNotes={setNotes} 
                         setLines={setLines} 
-                        openModal={changeModal} 
+                        openModal={changeModal}
+                        socket={socket} 
                     />
-                    <Notes notes={notes} setNotes={setNotes} />
+                    <Notes notes={notes} setNotes={setNotes} socket={socket} />
                     <CanvasArea  
                         drawPointer={drawPointer} 
                         tool={tool} 
                         lines={lines} 
                         setLines={setLines}
+                        socket={socket}
                     />
                 </> }
             

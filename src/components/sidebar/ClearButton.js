@@ -1,17 +1,17 @@
 import React from 'react';
 import axios from 'axios'
+import NotesService from '../../services/NotesService'
 
-
-const ClearButton = ({ setNotes, setLines }) => {
+const ClearButton = ({ setNotes, setLines, socket }) => {
     // clear canvas by retrieving entire notes array and setting it to {}
-    const clear = async () => {
-        setLines([])
-        setNotes([])
-        await axios.post('api/notes/clear', {here: 'here'})
-    }
-    
+    const clear = async () => NotesService.clearAll(setNotes, setLines, socket)
+
+
     return (
-        <img alt="clear" className="sidebar-button" value="clear" src="" onClick={clear} />
+        <div className="sidebar-button" onClick={clear}>
+            <img className="button-img" alt="clear" src="" />
+        </div>
+        
     )
 };
 

@@ -4,7 +4,9 @@ import React from 'react';
 const PenButton = ({changePointer}) => {
 
     return (
-        <input className="sidebar-button" value="pointer" type="submit" onClick={() => changePointer()}/>
+        <div className="sidebar-button" onClick={() => changePointer()}>
+            <img className="button-img" alt="pointer" src="" />
+        </div>
     )
 }
 
