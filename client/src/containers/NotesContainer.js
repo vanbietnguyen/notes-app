@@ -10,6 +10,7 @@ import socketIOClient from "socket.io-client";
 import config from '../config.js'
 
 const ENDPOINT = config.SERVER_URI;
+console.log(ENDPOINT)
 
 const socket = socketIOClient(ENDPOINT);
 
