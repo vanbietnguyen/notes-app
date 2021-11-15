@@ -24,9 +24,12 @@ const NotesContainer = () => {
 
     // Use this to save start of new drawing which is the last line of lines)
     let lastLine = useRef(false)
+    // save notes here to be accessed synchronously
+    let notesRef = useRef(false)
 
     useEffect(async() => {
-        NotesService.getNotes(setNotes)
+        let result = await NotesService.getNotes(setNotes)
+        notesRef.current = result 
         DrawingService.getLines(setLines, lastLine)
     }, [])
 
@@ -36,10 +39,20 @@ const NotesContainer = () => {
         // cannot access state because useState is async and requires re-render(utilizing 3 lifecycle methods) 
         // cannot set useEffect second arg because it creates infinite loop
         // Must use useRef to store lastLine to have access to updated values prior to rendering
+        // alternate solution is to use useReducer or Redux
    
-        socket.on("modifyNotes", (data, i) => {
-            // if(!notes.length) NotesService.getNotes(setNotes)
-            setNotes(data)
+        socket.on("addNotes", (data) => {
+            notesRef.current.push(data)
+            setNotes([...notes, data])
+        });
+        socket.on("moveNotes", (data, id) => {
+            notesRef.current = notesRef.current.filter((n) => n._id !== id)
+            notesRef.current.push(data)
+            setNotes(notesRef.current)
+        });
+        socket.on("deleteNotes", (id) => {
+            notesRef.current = notesRef.current.filter((n) => n._id !== id)
+            setNotes(notesRef.current)
         });
         socket.on("drawing", (data) => {
             // set lastLine as start of newLine to be used in drawingMove
@@ -48,8 +61,7 @@ const NotesContainer = () => {
             else setLines([...lines, data])
         });
         socket.on("drawingMove", (data) => {
-            // update reference, continual concatenation of data points sent 
-            // and setLines to concat of lines and lastLine
+            // update reference with coordinates being sent
             lastLine.points = lastLine.points.concat(data.points);
             setLines([...lines, lastLine])
         });

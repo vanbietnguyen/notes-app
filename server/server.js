@@ -32,7 +32,9 @@ let io = socket(server, {
 
 io.on("connection", (socket) => {
   console.log(`New ${socket.id} connected`);
-  socket.on("modifyNotes", (data) => socket.broadcast.emit(`modifyNotes`, data)); 
+  socket.on("addNotes", (data) => socket.broadcast.emit(`addNotes`, data)); 
+  socket.on("moveNotes", (data, id) => socket.broadcast.emit(`moveNotes`, data, id)); 
+  socket.on("deleteNotes", (data) => socket.broadcast.emit(`deleteNotes`, data)); 
   socket.on("clearAll", () => socket.broadcast.emit(`clearAll`));
   socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
   socket.on('drawingMove', (data) => socket.broadcast.emit('drawingMove', data));
