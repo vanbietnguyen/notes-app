@@ -27,7 +27,7 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
   const handleMouseMove = (e) => {
     if (!isDrawing.current) return;
     let lastPoint = DrawingService.mouseMove(e, lines, setLines)
-    DrawingService.throttle(400, socket.emit('drawingMove', {tool, points: lastPoint}))
+    DrawingService.throttle(400, socket.emit('drawingMove', lastPoint))
   };
 
   const handleMouseUp = () => {

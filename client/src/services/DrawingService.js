@@ -36,7 +36,6 @@ class DrawingService {
   static mouseDown(e, lines, tool, setLines) {
     const pos = e.target.getStage().getPointerPosition();
     let line = { tool, points: [pos.x, pos.y] }
-    console.log(line, 'line in mousedown')
     let newLines = [...lines, line]
     setLines(newLines);
     return line
