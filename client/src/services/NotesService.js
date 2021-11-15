@@ -11,7 +11,7 @@ class NotesService {
             let result = await axios.post(`${config.SERVER_URI}api/notes/add`, note)
             let newNotes = [...notes, result.data]
             setNotes(newNotes)
-            socket.emit("modifyNotes", newNotes)
+            socket.emit("addNotes", result.data)
         } catch(e) {
             return e
         }
@@ -36,7 +36,7 @@ class NotesService {
         }, [])
 
         setNotes(newNotes)
-        socket.emit("modifyNotes", newNotes);
+        socket.emit("deleteNotes", _id);
         try {
             await axios.post(`${config.SERVER_URI}api/notes/delete`, { _id })
         } catch(e) {
@@ -71,12 +71,13 @@ class NotesService {
         let other = notes.filter((n) => n._id !== id)
         note[0].left = left
         note[0].top = top
+        console.log(note[0].key)
         let newNotes = [...other, ...note]
         setNotes(newNotes)
         
         try {
             await axios.post(`${config.SERVER_URI}api/notes/update`, { id, left, top })
-            socket.emit("modifyNotes", newNotes)
+            socket.emit("moveNotes", note[0], id)
         } catch(e) {
             return e
         }
@@ -86,6 +87,7 @@ class NotesService {
         try {
             let result = await axios.get(`${config.SERVER_URI}api/notes/`)
             setNotes(result.data);    
+            return result.data
         } catch (e) {
             return e
         }
