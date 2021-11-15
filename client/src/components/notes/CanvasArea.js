@@ -20,14 +20,14 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
   const handleMouseDown = (e) => {
     if(!drawPointer) return
     isDrawing.current = true;
-    DrawingService.mouseDown(e, lines, tool, setLines)
-    socket.emit("drawing", lines)   
+    let line = DrawingService.mouseDown(e, lines, tool, setLines)
+    socket.emit("drawing", line)   
   };
 
   const handleMouseMove = (e) => {
     if (!isDrawing.current) return;
-    DrawingService.mouseMove(e, lines, setLines)
-    DrawingService.throttle(400, socket.emit('drawing', lines))
+    let lastPoint = DrawingService.mouseMove(e, lines, setLines)
+    DrawingService.throttle(400, socket.emit('drawingMove', {tool, points: lastPoint}))
   };
 
   const handleMouseUp = () => {
@@ -60,8 +60,7 @@ const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLine
               globalCompositeOperation={
                 line.tool === 'eraser' ? 'destination-out' : 'source-over'
               }
-            />
-          ))}
+            />))}
         </Layer>
       </Stage>
     </div>

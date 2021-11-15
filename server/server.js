@@ -35,6 +35,7 @@ io.on("connection", (socket) => {
   socket.on("modifyNotes", (data) => socket.broadcast.emit(`modifyNotes`, data)); 
   socket.on("clearAll", () => socket.broadcast.emit(`clearAll`));
   socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
+  socket.on('drawingMove', (data) => socket.broadcast.emit('drawingMove', data));
   socket.on("disconnect", (e) => console.log("Client disconnected"));
 });
 

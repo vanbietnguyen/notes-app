@@ -2,7 +2,7 @@ import axios from 'axios'
 import config from '../config.js'
 
 class DrawingService {
-  static async getLines(setLines) {
+  static async getLines(setLines, linesRef) {
     try {
       let result = await axios.get(`${config.SERVER_URI}api/lines/`)
 
@@ -11,6 +11,9 @@ class DrawingService {
           delete line.__v
       }
       setLines(result.data)
+      // linesRef.current = result.data
+      return result.data
+      // console.log(result.data, 'lines')
     } catch (e) {
         return e
     }
@@ -21,18 +24,22 @@ class DrawingService {
     const point = stage.getPointerPosition();
     let lastLine = lines[lines.length - 1];
     // add point
-    lastLine.points = lastLine.points.concat([point.x, point.y]);
+    let lastPoint = [point.x, point.y]
+    lastLine.points = lastLine.points.concat(lastPoint);
+
     
     // replace last
-    lines.splice(lines.length - 1, 1, lastLine);
-    return setLines(lines.concat())
+    setLines([...lines])
+    return lastPoint
   }
 
   static mouseDown(e, lines, tool, setLines) {
     const pos = e.target.getStage().getPointerPosition();
     let line = { tool, points: [pos.x, pos.y] }
+    console.log(line, 'line in mousedown')
     let newLines = [...lines, line]
-    return setLines(newLines);
+    setLines(newLines);
+    return line
   }
 
   static async mouseUp(line) {

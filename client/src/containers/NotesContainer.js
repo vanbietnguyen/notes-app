@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Notes from '../components/notes/Notes'
 import Sidebar from './Sidebar'
 import NotesModal from '../components/notes/NotesModal'
@@ -21,16 +21,38 @@ const NotesContainer = () => {
     const [drawPointer, setDrawPointer] = useState(false)
     const [lines, setLines] = useState([]);
     const [tool, setTool] = useState("eraser")
-    
+
+    // Use this to save start of new drawing which is the last line of lines)
+    let lastLine = useRef(false)
+
     useEffect(async() => {
         NotesService.getNotes(setNotes)
-        DrawingService.getLines(setLines)
+        DrawingService.getLines(setLines, lastLine)
     }, [])
 
     // websockets listeners
     useEffect(() => {
-        socket.on("modifyNotes", (data) => setNotes(data));
-        socket.on("drawing", (data) => setLines(data));
+        // sending packets of data rather than entire lines array
+        // cannot access state because useState is async and requires re-render(utilizing 3 lifecycle methods) 
+        // cannot set useEffect second arg because it creates infinite loop
+        // Must use useRef to store lastLine to have access to updated values prior to rendering
+   
+        socket.on("modifyNotes", (data, i) => {
+            // if(!notes.length) NotesService.getNotes(setNotes)
+            setNotes(data)
+        });
+        socket.on("drawing", (data) => {
+            // set lastLine as start of newLine to be used in drawingMove
+            lastLine = data
+            if(!lines.length) setLines([data])
+            else setLines([...lines, data])
+        });
+        socket.on("drawingMove", (data) => {
+            // update reference, continual concatenation of data points sent 
+            // and setLines to concat of lines and lastLine
+            lastLine.points = lastLine.points.concat(data.points);
+            setLines([...lines, lastLine])
+        });
         socket.on("clearAll", () => {
             setNotes([])
             setLines([])

@@ -11,7 +11,7 @@ class NotesService {
             let result = await axios.post(`${config.SERVER_URI}api/notes/add`, note)
             let newNotes = [...notes, result.data]
             setNotes(newNotes)
-            socket.emit("modifyNotes", newNotes)
+            socket.emit("modifyNotes", result.data)
         } catch(e) {
             return e
         }
@@ -67,16 +67,22 @@ class NotesService {
         e.target.style.top = `${top}px`;
         
         let id = e.target.id
-        let note = notes.filter((n) => n._id === id)
-        let other = notes.filter((n) => n._id !== id)
-        note[0].left = left
-        note[0].top = top
-        let newNotes = [...other, ...note]
-        setNotes(newNotes)
-        
+
+        let ind
+        for(let i = 0; i < notes.length; i++) {
+            if(notes[i]._id === id) {
+                ind = i
+                break
+            }
+        }
+
+        let note = notes[ind]
+        note.left = left
+        note.top = top
+        setNotes([...notes])
+        socket.emit("modifyNotes", notes)
         try {
             await axios.post(`${config.SERVER_URI}api/notes/update`, { id, left, top })
-            socket.emit("modifyNotes", newNotes)
         } catch(e) {
             return e
         }
