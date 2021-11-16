@@ -32,12 +32,20 @@ let io = socket(server, {
 
 io.on("connection", (socket) => {
   console.log(`New ${socket.id} connected`);
+  socket.emit("me", socket.id); 
   socket.on("addNotes", (data) => socket.broadcast.emit(`addNotes`, data)); 
   socket.on("moveNotes", (data, id) => socket.broadcast.emit(`moveNotes`, data, id)); 
   socket.on("deleteNotes", (data) => socket.broadcast.emit(`deleteNotes`, data)); 
   socket.on("clearAll", () => socket.broadcast.emit(`clearAll`));
   socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
   socket.on('drawingMove', (data) => socket.broadcast.emit('drawingMove', data));
+  socket.on("callUser", ({ userToCall, signalData, from, name }) => {
+		io.to(userToCall).emit("callUser", { signal: signalData, from, name });
+	});
+
+	socket.on("answerCall", (data) => {
+		io.to(data.to).emit("callAccepted", data.signal)
+	});
   socket.on("disconnect", (e) => console.log("Client disconnected"));
 });
 

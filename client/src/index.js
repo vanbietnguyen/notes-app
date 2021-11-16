@@ -4,10 +4,13 @@ import './scss/app.scss';
 import App from './App';
 import reportWebVitals from './tools/reportWebVitals';
 
+// may be issue here
+import { ContextProvider } from './components/video/SocketContext'
+
 ReactDOM.render(
-  <React.StrictMode>
+  <ContextProvider>
     <App />
-  </React.StrictMode>,
+  </ContextProvider>,
   document.getElementById('root')
 );
 

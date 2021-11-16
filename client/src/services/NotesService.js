@@ -71,7 +71,6 @@ class NotesService {
         let other = notes.filter((n) => n._id !== id)
         note[0].left = left
         note[0].top = top
-        console.log(note[0].key)
         let newNotes = [...other, ...note]
         setNotes(newNotes)
         

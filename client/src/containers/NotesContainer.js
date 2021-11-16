@@ -57,13 +57,11 @@ const NotesContainer = () => {
         socket.on("drawing", (data) => {
             // set lastLine as start of newLine to be used in drawingMove
             lastLine = data
-            console.log('line being started:', lastLine)
             if(!lines.length) setLines([data])
             else setLines([...lines, data])
         });
         socket.on("drawingMove", (data) => {
             // update reference with coordinates being sent
-            console.log('line being drawn:', data)
             lastLine.points = lastLine.points.concat(data);
             setLines([...lines, lastLine])
         });

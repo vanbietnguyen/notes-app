@@ -1,5 +1,6 @@
 import './scss/app.scss';
 import NotesContainer from './containers/NotesContainer.js'
+import VideoContainer from './containers/VideoContainer'
 
 function App() {
   
@@ -14,7 +15,7 @@ function App() {
 
       {/* <LoginContainer /> */}
       <NotesContainer />
-      
+      <VideoContainer />
 
     </div>
   );
