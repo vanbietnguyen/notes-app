@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import NotesService from '../../services/NotesService'
+import { SocketContext } from '../../containers/SocketContext'
 
-const ClearButton = ({ setNotes, setLines, socket }) => {
+const ClearButton = ({ setNotes, setLines }) => {
+    const { socket } = useContext(SocketContext)
 
     const clear = async () => NotesService.clearAll(setNotes, setLines, socket)
 

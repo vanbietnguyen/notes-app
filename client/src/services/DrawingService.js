@@ -1,8 +1,9 @@
 import axios from 'axios'
 import config from '../config.js'
+config.SERVER_URI = 'https://koala-notes-app.herokuapp.com/';
 
 class DrawingService {
-  static async getLines(setLines, linesRef) {
+  static async getLines(setLines) {
     try {
       let result = await axios.get(`${config.SERVER_URI}api/lines/`)
 

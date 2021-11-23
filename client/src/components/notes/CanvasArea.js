@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import { Stage, Layer, Line } from 'react-konva';
 import DrawingService from '../../services/DrawingService';
+import { SocketContext } from '../../containers/SocketContext'
 
-const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLines, socket}) => {
+const CanvasArea = ({onClearLines, clearLines, drawPointer, tool, lines, setLines }) => {
 
+  const { socket } = useContext(SocketContext)
   const isDrawing = useRef(false);
   const stageRef = useRef(false)
-
 
   useEffect(() => {
     if(!lines.length) startOver(stageRef.current)

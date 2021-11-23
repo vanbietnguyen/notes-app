@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import VideoPlayer from '../components/video/VideoPlayer'
-// import Sidebar from '../components/video/Sidebar'
+import { Button } from '@material-ui/core';
 import Notifications from '../components/video/Notifications'
 import Sidebar from '../components/video/Sidebar'
 
@@ -11,7 +11,7 @@ const VideoContainer = () => {
 
   return (
     <>
-    {hidden ? <button className="vid-collapse vid-button" onClick={() => setHidden(hidden => !hidden)}>show</button> : <button className="vid-collapse" onClick={() => setHidden(hidden => !hidden)}>hide</button>}
+    {hidden ? <Button className="vid-collapse vid-button" onClick={() => setHidden(hidden => !hidden)}>show</Button> : <Button className="vid-collapse" onClick={() => setHidden(hidden => !hidden)}>hide</Button>}
       <div className={hidden ? "video-modal hidden" : "video-modal"}>
         
         <VideoPlayer />

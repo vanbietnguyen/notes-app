@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { SocketContext } from './SocketContext'
+import { SocketContext } from '../../containers/SocketContext'
 
 const Options = ({ children }) => {
 

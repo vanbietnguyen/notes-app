@@ -15,7 +15,7 @@ function App() {
 
       {/* <LoginContainer /> */}
       <NotesContainer />
-      <VideoContainer />
+      {/* <VideoContainer /> */}
 
     </div>
   );

@@ -1,9 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Assignment, Phone, PhoneDisabled } from '@material-ui/icons';
 import { Button, TextField } from '@material-ui/core';
 
-import { SocketContext } from './SocketContext';
+import { SocketContext } from '../../containers/SocketContext';
 
 const Sidebar = ({ children }) => {
   const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } = useContext(SocketContext);

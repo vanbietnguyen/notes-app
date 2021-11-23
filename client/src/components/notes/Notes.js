@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Note from './Note'
 import NotesService from '../../services/NotesService'
+import { SocketContext } from '../../containers/SocketContext'
 
-const Notes = ({ notes, setNotes, socket }) => {
-    
+const Notes = ({ notes, setNotes }) => {
+
+    const { socket } = useContext(SocketContext);
     // abstract away logic in Service functions
     const deleteNote = async (_id) => {
         NotesService.deleteNote(_id, notes, setNotes, socket)

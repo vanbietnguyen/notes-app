@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { CirclePicker } from 'react-color';
 import NotesService from '../../services/NotesService'
+import { SocketContext } from '../../containers/SocketContext'
 
-const NotesModal = ({ notes, setNotes, closeModal, socket }) => {
+const NotesModal = ({ notes, setNotes, closeModal }) => {
+    const { socket } = useContext(SocketContext);
 
     const [notesInput, setNotesInput] = useState('')
     const [color, setColor] = useState('#68B6D9')

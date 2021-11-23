@@ -1,5 +1,7 @@
+import React, { useContext } from 'react'
 import axios from 'axios';
 import config from '../config.js'
+config.SERVER_URI = 'https://koala-notes-app.herokuapp.com/';
 
 class NotesService {
     

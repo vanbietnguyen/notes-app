@@ -12,7 +12,6 @@ const Sidebar = props => {
             changeTool, 
             changePointer, 
             setLines, 
-            socket, 
             pointerClass } = props
             
     const [active, setActive] = useState('pointer')
@@ -31,7 +30,7 @@ const Sidebar = props => {
         <div id="sidebar">
             <NotesButton changeClassName={changeClassName} openModal={openModal} />
             <PointerButton pointerClass={pointerClass} changePointer={changePointer} setActive={setActive} changeClassName={changeClassName}/>
-            <ClearButton notes={notes} setNotes={setNotes} setLines={setLines} socket={socket}/>
+            <ClearButton notes={notes} setNotes={setNotes} setLines={setLines} />
             <EraserButton changeTool={changeTool} changeClassName={changeClassName}/>
             <PenButton changeTool={changeTool} changeClassName={changeClassName}/>
         </div>

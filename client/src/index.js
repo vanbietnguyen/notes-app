@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './tools/reportWebVitals';
 
 // may be issue here
-import { ContextProvider } from './components/video/SocketContext'
+import { ContextProvider } from './containers/SocketContext'
 
 ReactDOM.render(
   <ContextProvider>
